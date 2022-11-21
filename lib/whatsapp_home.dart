@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/calls.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
-import 'package:whatsapp_clone/pages/chat.dart';
+import 'package:whatsapp_clone/pages/chat_list.dart';
 import 'package:whatsapp_clone/pages/status.dart';
 
 class WhatsAppHome extends StatefulWidget {
@@ -27,10 +27,10 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
           title: const Text("WhatsApp"),
           bottom: TabBar(
             tabs: const <Widget>[
-              Tab(icon: Icon(Icons.camera_alt_outlined)),
-              Tab(text: "Chat"),
-              Tab(text: "Status"),
-              Tab(text: "Calls"),
+              Tab(icon: Icon(Icons.camera_alt_rounded)),
+              Tab(text: "CHAT"),
+              Tab(text: "STATUS"),
+              Tab(text: "CALLS"),
             ],
           controller: controller,
         )
@@ -38,7 +38,7 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
       body: TabBarView(
         // ignore: sort_child_properties_last
         children: const <Widget>[
-          Camera(),Chat(),Status(),Calls()
+          Camera(),ChatList(),Status(),Calls()
         ],
         controller: controller,
       ),
