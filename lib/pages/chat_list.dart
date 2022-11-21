@@ -22,6 +22,22 @@ class _ChatListState extends State<ChatList> {
             leading: CircleAvatar(
               backgroundImage: NetworkImage(messageData[i].imageUrl),
             ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text(messageData[i].name,
+              style: const TextStyle(fontWeight: FontWeight.bold),  
+            ),
+              Text(messageData[i].time,
+              style: const TextStyle(color: Colors.grey, fontSize: 14.0)
+            )
+            ]),
+            subtitle: Container(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Text(messageData[i].message,
+              style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+              ),
+            ),
           )
         ],
       ),
