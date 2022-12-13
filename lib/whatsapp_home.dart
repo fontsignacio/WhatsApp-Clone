@@ -19,6 +19,7 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
     super.initState();
     controller = TabController(length: 4, vsync: this);
   }
+
   
   @override
   Widget build(BuildContext context) {
@@ -38,11 +39,16 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
       body: TabBarView(
         // ignore: sort_child_properties_last
         children: const <Widget>[
-          Camera(),ChatList(),Status(),Calls()
+          Camera(),
+          ChatList(),
+          Status(),
+          Calls()
         ],
         controller: controller,
       ),
     );
   } 
 }
+
+
 
