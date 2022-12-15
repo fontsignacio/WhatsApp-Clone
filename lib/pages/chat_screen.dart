@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+  final String name;
+  const ChatScreen({super.key, required this.name});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -12,7 +13,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Contact"),
+        title: Text(widget.name),
       ),
     );
   }
