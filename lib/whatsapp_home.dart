@@ -27,6 +27,7 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
       appBar: AppBar(
           title: const Text("WhatsApp"),
           bottom: TabBar(
+            indicatorColor: const Color.fromARGB(255, 37, 211, 102),
             tabs: const <Widget>[
               Tab(icon: Icon(Icons.camera_alt_rounded)),
               Tab(text: "CHAT"),
