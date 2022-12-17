@@ -20,6 +20,31 @@ class _StatusState extends State<Status> {
           ),
           ListTile(
             leading: CircleAvatar(
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(status1[0].imgUrl), 
+                radius: 20.0,               
+              )
+            ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text(status1[0].name,
+              style: const TextStyle(fontWeight: FontWeight.bold),  
+            ),
+            ]),
+            subtitle: Container(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Text(status1[0].time,
+              style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+              ),
+            ),
+          ),
+
+          const Text("Recent updates", 
+          style: TextStyle(color: Colors.grey, fontSize: 15.0),),
+          
+          ListTile(
+            leading: CircleAvatar(
               backgroundColor: Colors.green,
               radius: 22.0,
               child: CircleAvatar(
