@@ -20,13 +20,25 @@ class _StatusState extends State<Status> {
               child: CircleAvatar(
                 backgroundImage: NetworkImage(mystatus[0].imgUrl),
                 radius: 22.0,
+
                 child: Container(
-                  padding: const EdgeInsets.all(20.0),    
-                  child: const Icon(Icons.add_circle,                 
-                  color: Color.fromARGB(255, 37, 211, 102))
-                )                                         
+                  padding: const EdgeInsets.only(left: 20,top: 20),
+                  width: 60, 
+                  height: 60,
+                  child: Container(
+                  padding: const EdgeInsets.all(0.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(60 / 2),
+                  ),
+                    child: const Center(
+                      child: Icon(Icons.add_circle,color: Color.fromARGB(255, 37, 211, 102), size: 20),
+                    )
+                  ),
+                ),
               )
             ),
+
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -41,6 +53,7 @@ class _StatusState extends State<Status> {
               ),
             ),  
           ),
+          
           Container(
             padding: const EdgeInsets.only(left: 15.0),
             child: const Text("Recent updates", 
