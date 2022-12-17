@@ -18,7 +18,7 @@ class _StatusState extends State<Status> {
           ListTile(
             leading: CircleAvatar(
               child: CircleAvatar(
-                backgroundImage: NetworkImage(status1[0].imgUrl),
+                backgroundImage: NetworkImage(mystatus[0].imgUrl),
                 radius: 22.0,
                 child: Container(
                   padding: const EdgeInsets.all(20.0),    
@@ -30,13 +30,13 @@ class _StatusState extends State<Status> {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-              Text(status1[0].name,
+              Text(mystatus[0].name,
               style: const TextStyle(fontWeight: FontWeight.bold),  
             ),
             ]),
             subtitle: Container(
               padding: const EdgeInsets.only(top: 5.0),
-              child: Text(status1[0].time,
+              child: Text(mystatus[0].time,
               style: const TextStyle(color: Colors.grey, fontSize: 15.0),
               ),
             ),  

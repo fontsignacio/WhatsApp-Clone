@@ -7,7 +7,7 @@ class StatusModel {
 
   StatusModel({required this.imgUrl,required this.name,required this.time});
 }
-List<StatusModel> status1 = [
+List<StatusModel> mystatus = [
   StatusModel(
     name: "My status",
     time: "Tab to add status update",
