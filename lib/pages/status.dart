@@ -19,7 +19,12 @@ class _StatusState extends State<Status> {
             leading: CircleAvatar(
               child: CircleAvatar(
                 backgroundImage: NetworkImage(status1[0].imgUrl),
-                radius: 22.0,               
+                radius: 22.0,
+                child: Container(
+                  padding: const EdgeInsets.all(20.0),    
+                  child: const Icon(Icons.add_circle,                 
+                  color: Color.fromARGB(255, 37, 211, 102))
+                )                                         
               )
             ),
             title: Row(
@@ -46,25 +51,26 @@ class _StatusState extends State<Status> {
             height: 10.0, 
           ),
 
+        for(int i = 0; i<=2 ; i++)
           ListTile(
             leading: CircleAvatar(
               backgroundColor: const Color.fromARGB(255, 37, 211, 102),
-              radius: 22.0,
+              radius: 22.0, 
               child: CircleAvatar(
-                backgroundImage: NetworkImage(status[0].imgUrl), 
+                backgroundImage: NetworkImage(status[i].imgUrl), 
                 radius: 20.0,               
               )
             ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-              Text(status[0].name,
+              Text(status[i].name,
               style: const TextStyle(fontWeight: FontWeight.bold),  
             ),
             ]),
             subtitle: Container(
               padding: const EdgeInsets.only(top: 5.0),
-              child: Text(status[0].time,
+              child: Text(status[i].time,
               style: const TextStyle(color: Colors.grey, fontSize: 15.0),
               ),
             ),
@@ -80,23 +86,24 @@ class _StatusState extends State<Status> {
             height: 10.0, 
           ),
 
+        for(int i = 3; i<=4 ; i++)
           ListTile(
             leading: CircleAvatar(
               child: CircleAvatar(
-                backgroundImage: NetworkImage(status[1].imgUrl), 
+                backgroundImage: NetworkImage(status[i].imgUrl), 
                 radius: 22.0,               
               )
             ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-              Text(status[1].name,
+              Text(status[i].name,
               style: const TextStyle(fontWeight: FontWeight.bold),  
             ),
             ]),
             subtitle: Container(
               padding: const EdgeInsets.only(top: 5.0),
-              child: Text(status[1].time,
+              child: Text(status[i].time,
               style: const TextStyle(color: Colors.grey, fontSize: 15.0),
               ),
             ),
