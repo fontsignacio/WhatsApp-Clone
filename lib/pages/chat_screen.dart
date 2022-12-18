@@ -12,10 +12,16 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _textController = TextEditingController();
 
   Widget _buildTextComposer(){
-    return Row(
+    return IconTheme(
+    data: IconThemeData(color: Theme.of(context).colorScheme.secondary),  
+    child: Row(
       children:<Widget>[
-        Flexible(child: TextField(controller: _textController,))
-      ],
+          Flexible(child: TextField(controller: _textController,)),
+          IconButton(
+            onPressed: (() => {}),
+            icon: const Icon(Icons.send))
+        ],
+      )
     );
   }
 
