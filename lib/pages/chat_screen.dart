@@ -8,8 +8,24 @@ class ChatScreen extends StatefulWidget {
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final TextEditingController _textController = TextEditingController();
+  final List<ChatMessage> _messages = <ChatMessage>[];
+  
+  void _handledSubmit(String text){
+
+    ChatMessage message = ChatMessage(
+      text: text,
+      animationController: AnimationController(
+        vsync: this),
+      name: widget.name);
+
+    setState(() {
+      _messages.insert(0, message);
+    });
+    
+    message.animationController.forward();
+  }
 
   Widget _buildTextComposer(){
     return IconTheme(
@@ -18,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
       children:<Widget>[
           Flexible(child: TextField(controller: _textController,)),
           IconButton(
-            onPressed: (() => {}),
+            onPressed: (() => _handledSubmit(_textController.text)),
             icon: const Icon(Icons.send))
         ],
       )
@@ -33,11 +49,50 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Column(
         children: <Widget>[
+          Flexible(
+            child:  ListView.builder(
+              itemBuilder: (_, int index) => _messages[index],
+              itemCount: _messages.length,
+            ),
+          ),
+          const Divider(height: 1.0),
           Container(
             child: _buildTextComposer(),
           )
         ],
       )
+    );
+  }
+}
+
+class ChatMessage extends StatelessWidget {
+
+  const ChatMessage({super.key, required this.text,required this.animationController,required this.name});
+  final String text;
+  final AnimationController animationController;
+  final String name; 
+
+
+  @override
+  Widget build(BuildContext context) {
+    return SizeTransition(
+      sizeFactor: CurvedAnimation(
+        parent: animationController,  
+        curve: Curves.easeOut),
+      child: Row(
+        children: <Widget>[
+          CircleAvatar(
+            child: Text(name[0]),
+          ),
+          Expanded(
+            child: Column(
+              children: <Widget>[
+                Text(name),
+                Text(text)
+              ],
+            ))
+        ],
+      ),
     );
   }
 }
