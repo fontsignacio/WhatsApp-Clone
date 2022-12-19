@@ -17,6 +17,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     ChatMessage message = ChatMessage(
       text: text,
       animationController: AnimationController(
+        duration: const Duration(milliseconds: 700),
         vsync: this),
       name: widget.name);
 
@@ -90,7 +91,8 @@ class ChatMessage extends StatelessWidget {
                 Text(name),
                 Text(text)
               ],
-            ))
+            )
+          )
         ],
       ),
     );
