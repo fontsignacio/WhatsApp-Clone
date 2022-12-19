@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
-  final String name;
+  final String name; 
   const ChatScreen({super.key, required this.name});
 
   @override
@@ -11,9 +11,15 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final TextEditingController _textController = TextEditingController();
   final List<ChatMessage> _messages = <ChatMessage>[];
-  
-  void _handledSubmit(String text){
+  bool _isTyped = false;
 
+  void _handledSubmit(String text){
+    _textController.clear();
+
+    setState(() {
+      _isTyped = false;
+    });
+    
     ChatMessage message = ChatMessage(
       text: text,
       animationController: AnimationController(
@@ -33,10 +39,19 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     data: IconThemeData(color: Theme.of(context).colorScheme.secondary),  
     child: Row(
       children:<Widget>[
-          Flexible(child: TextField(controller: _textController,)),
+          Flexible(child: TextField(
+            controller: _textController,
+            onChanged: (String text) {
+              setState(() {
+                _isTyped = text.isNotEmpty;
+              });
+            },
+          )
+        ),
           IconButton(
-            onPressed: (() => _handledSubmit(_textController.text)),
-            icon: const Icon(Icons.send))
+            onPressed: _isTyped ? () => _handledSubmit(_textController.text) : null, 
+            icon: const Icon(Icons.send),
+          )
         ],
       )
     );
