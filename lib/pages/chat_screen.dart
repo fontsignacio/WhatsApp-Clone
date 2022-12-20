@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/models/chat_model.dart';
 
 class ChatScreen extends StatefulWidget {
   final String name; 
@@ -29,6 +30,8 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
     setState(() {
       _messages.insert(0, message);
+      var data = messageData.firstWhere((t) => t.name == widget.name);
+      data.message = message.text; 
     });
     
     message.animationController.forward();
@@ -46,6 +49,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 _isTyped = text.isNotEmpty;
               });
             },
+            decoration:const  InputDecoration.collapsed(hintText: "Enviar Mensaje"),
           )
         ),
           IconButton(
@@ -67,6 +71,8 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
         children: <Widget>[
           Flexible(
             child:  ListView.builder(
+              padding: const EdgeInsets.all(8.0),
+              reverse: true,
               itemBuilder: (_, int index) => _messages[index],
               itemCount: _messages.length,
             ),
@@ -95,20 +101,31 @@ class ChatMessage extends StatelessWidget {
       sizeFactor: CurvedAnimation(
         parent: animationController,  
         curve: Curves.easeOut),
+      child: Container(
+      margin:  const EdgeInsets.symmetric(vertical: 10.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          CircleAvatar(
-            child: Text(name[0]),
+          Container(
+             margin: const EdgeInsets.only(right: 16.0),
+             child: CircleAvatar(
+                child: Text(name[0]),
+            ),
           ),
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(name),
-                Text(text)
+                Text(name, style: Theme.of(context).textTheme.subtitle1),
+                Container(
+                  margin: const EdgeInsets.only(top: 5.0),
+                  child: Text(text),
+                ),
               ],
             )
           )
         ],
+      ),
       ),
     );
   }
