@@ -3,6 +3,8 @@ import 'package:whatsapp_clone/pages/calls.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
 import 'package:whatsapp_clone/pages/chat_list.dart';
 import 'package:whatsapp_clone/pages/status.dart';
+import 'package:whatsapp_clone/pages/contacts.dart';
+
 
 class WhatsAppHome extends StatefulWidget {
   const WhatsAppHome({super.key});
@@ -46,6 +48,15 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
           Calls()
         ],
         controller: controller,
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        child: const Icon(Icons.message, color: Colors.white,),
+        onPressed: (){
+          var router = MaterialPageRoute(
+            builder: (context) => const Contacts());
+            Navigator.of(context).push(router);
+        }
       ),
     );
   } 

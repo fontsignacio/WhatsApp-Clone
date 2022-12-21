@@ -49,7 +49,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 _isTyped = text.isNotEmpty;
               });
             },
-            decoration:const  InputDecoration.collapsed(hintText: "Enviar Mensaje"),
+            decoration:const  InputDecoration.collapsed(hintText: "Message"),
           )
         ),
           IconButton(
