@@ -34,4 +34,14 @@ List<StatusModel> contact = [
     status: "Hey there! I am using WhatsApp",
     imgUrl: messageData[4].imageUrl 
   ),
+  StatusModel(
+    name: messageData[5].name,
+    status: "Hey there! I am using WhatsApp",
+    imgUrl: messageData[5].imageUrl 
+  ),
+  StatusModel(
+    name: messageData[6].name,
+    status: "Hey there! I am using WhatsApp",
+    imgUrl: messageData[6].imageUrl 
+  ),
 ];

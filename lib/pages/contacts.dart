@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/contact_model.dart';
-
 import 'package:whatsapp_clone/pages/chat_screen.dart'; 
 
 
@@ -22,7 +21,6 @@ class _ContactsState extends State<Contacts> {
         itemCount: contact.length,
         itemBuilder:(context, i) => Column(
           children: <Widget>[
-
             ListTile(
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(contact[i].imgUrl),
