@@ -123,6 +123,12 @@ class _StatusState extends State<Status> {
           )
         ]
       ),
+
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        child: const Icon(Icons.camera_alt_rounded, color: Colors.white,),
+        onPressed: (){}
+      )
     );
   }
 }

@@ -27,6 +27,16 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
     return Scaffold(
       appBar: AppBar(
           title: const Text("WhatsApp"),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(Icons.search),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Icon(Icons.more_vert),
+            ),
+          ],
           bottom: TabBar(
             indicatorColor: const Color.fromARGB(255, 37, 211, 102),
             tabs: const <Widget>[
