@@ -43,7 +43,7 @@ class _ChatListState extends State<ChatList> {
               ),
               onTap: (() {
                 var router = MaterialPageRoute(
-                  builder: ((context) => ChatScreen(name: messageData[i].name)));
+                  builder: ((context) => ChatScreen(name: messageData[i].name, imageUrl: messageData[i].imageUrl,)));
                   Navigator.of(context).push(router);
               }
             ))

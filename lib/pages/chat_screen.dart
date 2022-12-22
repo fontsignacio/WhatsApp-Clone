@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
 
 class ChatScreen extends StatefulWidget {
-  final String name; 
-  const ChatScreen({super.key, required this.name});
+  final String name;
+  final String imageUrl;
+  const ChatScreen({super.key, required this.name, required this.imageUrl});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -26,7 +27,10 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       animationController: AnimationController(
         duration: const Duration(milliseconds: 700),
         vsync: this),
-      name: widget.name);
+      name: widget.name,
+      imageUrl: widget.imageUrl
+    
+    );
 
     setState(() {
       _messages.insert(0, message);
@@ -65,7 +69,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name),
+        title: Text(widget.name)
       ),
       body: Column(
         children: <Widget>[
@@ -89,10 +93,11 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
 class ChatMessage extends StatelessWidget {
 
-  const ChatMessage({super.key, required this.text,required this.animationController,required this.name});
+  const ChatMessage({super.key, required this.text,required this.animationController,required this.name, required this.imageUrl});
   final String text;
   final AnimationController animationController;
   final String name; 
+  final String imageUrl;
 
 
   @override
@@ -109,7 +114,7 @@ class ChatMessage extends StatelessWidget {
           Container(
              margin: const EdgeInsets.only(right: 16.0),
              child: CircleAvatar(
-                child: Text(name[0]),
+                backgroundImage: NetworkImage(imageUrl),
             ),
           ),
           Expanded(

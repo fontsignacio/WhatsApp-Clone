@@ -1,15 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/models/call_model.dart';
 
 class Calls extends StatelessWidget {
   const Calls({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const <Widget>[
-        Icon(Icons.call_sharp,size: 170.0,color: Colors.blueAccent),
-        Text("Calls")
-      ],
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: calls.length,
+        itemBuilder:(context, i) => Column(
+          children: <Widget>[
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(calls[i].imgUrl),
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(calls[i].name,
+                    style: const TextStyle(fontWeight: FontWeight.bold)
+                  ),  
+                ]
+              ),
+              subtitle: Container(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Text(calls[i].time,
+                style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+                ),
+              ),
+              trailing: calls[i].icon,
+            )
+          ]
+        ),
+      ),
     );
   }
 }

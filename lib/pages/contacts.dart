@@ -39,7 +39,7 @@ class _ContactsState extends State<Contacts> {
             ), 
               onTap: (() {
                 var router = MaterialPageRoute(
-                  builder: ((context) => ChatScreen(name: contact[i].name)));
+                  builder: ((context) => ChatScreen(name: contact[i].name, imageUrl: contact[i].imgUrl,)));
                   Navigator.of(context).push(router);
               })
             )
