@@ -4,6 +4,7 @@ import 'package:whatsapp_clone/pages/camera.dart';
 import 'package:whatsapp_clone/pages/chat_list.dart';
 import 'package:whatsapp_clone/pages/status.dart';
 
+enum MenuItem {item1,item2,item3,item4,item5}
 
 class WhatsAppHome extends StatefulWidget {
   const WhatsAppHome({super.key});
@@ -28,15 +29,39 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
       appBar: AppBar(
           title: const Text("WhatsApp"),
 
-          actions: const [
-            Padding(
+          actions: [
+            const Padding(
               padding: EdgeInsets.only(right: 20),
               child: Icon(Icons.search),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: Icon(Icons.more_vert),
-            ),
+              padding: const EdgeInsets.only(right: 10),
+              child: PopupMenuButton (
+                onSelected: (value) => {},
+                itemBuilder: (context) => const [
+                  PopupMenuItem(
+                    value: MenuItem.item1,
+                    child: Text("New group"),
+                  ),
+                  PopupMenuItem(
+                    value: MenuItem.item2,
+                    child: Text("New broadcast"),
+                  ),
+                  PopupMenuItem(
+                    value: MenuItem.item3,
+                    child: Text("Linked devices"),
+                  ),
+                  PopupMenuItem(
+                    value: MenuItem.item4,
+                    child: Text("Starred messages"),
+                  ),
+                  PopupMenuItem(
+                    value: MenuItem.item5,
+                    child: Text("Settings"),
+                  ) 
+                ]  
+              )
+            )
           ],
           
           bottom: TabBar(
