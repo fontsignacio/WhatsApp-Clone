@@ -24,7 +24,7 @@ class Calls extends StatelessWidget {
                 ]
               ),
               subtitle: Container(
-                padding: const EdgeInsets.only(top: 5.0),
+                padding: const EdgeInsets.only(top: 5.0),  
                 child: Text(calls[i].time,
                 style: const TextStyle(color: Colors.grey, fontSize: 15.0),
                 ),
@@ -34,11 +34,13 @@ class Calls extends StatelessWidget {
           ]
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: const Icon(Icons.add_call, color: Colors.white,),
         onPressed: (){}
       )
+      
     );
   }
 }
