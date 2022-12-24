@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
 
+
 class ChatScreen extends StatefulWidget {
   final String name;
   final String imageUrl;
@@ -69,7 +70,23 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name)
+        title: Avatar(name: widget.name, imageUrl: widget.imageUrl),
+        
+        actions: const [
+            Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(Icons.videocam_rounded),
+            ),
+
+            Padding(
+              padding: EdgeInsets.only(right: 15),
+              child: Icon(Icons.call),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Icon(Icons.more_vert),
+            ),
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -93,7 +110,14 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
 class ChatMessage extends StatelessWidget {
 
-  const ChatMessage({super.key, required this.text,required this.animationController,required this.name, required this.imageUrl});
+  const ChatMessage({
+    super.key,
+    required this.text,
+    required this.animationController,
+    required this.name,
+    required this.imageUrl
+  });
+
   final String text;
   final AnimationController animationController;
   final String name; 
@@ -135,3 +159,27 @@ class ChatMessage extends StatelessWidget {
     );
   }
 }
+
+class Avatar extends StatelessWidget {
+  final String name;
+  final String imageUrl;
+  const Avatar({super.key, required this.name, required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+            radius: 18,
+            backgroundImage: NetworkImage(imageUrl),
+          ),
+          Text(name),
+        ],
+      ),
+    );
+  }
+}
+
