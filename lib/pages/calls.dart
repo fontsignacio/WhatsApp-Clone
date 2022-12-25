@@ -30,6 +30,8 @@ class Calls extends StatelessWidget {
                 ),
               ),
               trailing: calls[i].icon,
+
+              onTap: () {}
             )
           ]
         ),

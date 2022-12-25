@@ -94,6 +94,13 @@ class _StatusState extends State<Status> {
               style: const TextStyle(color: Colors.grey, fontSize: 15.0),
               ),
             ),
+
+            onTap: () {
+              var router = MaterialPageRoute(
+              builder: (context) => Image.network(status[i].imgUrl));
+              Navigator.of(context).push(router);
+            }
+          
           ),
 
           Container(
@@ -127,6 +134,12 @@ class _StatusState extends State<Status> {
               style: const TextStyle(color: Colors.grey, fontSize: 15.0),
               ),
             ),
+
+            onTap: () {
+              var router = MaterialPageRoute(
+              builder: (context) => Image.network(status[i].imgUrl));
+              Navigator.of(context).push(router);
+            }
           )
         ]
       ),
