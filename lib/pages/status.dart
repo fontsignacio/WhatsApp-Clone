@@ -67,10 +67,6 @@ class _StatusState extends State<Status> {
             style: TextStyle(color: Colors.grey, fontSize: 15)),
           ),
 
-          const Divider(
-            height: 10.0, 
-          ),
-
         for(int i = 0; i<=2 ; i++)
           ListTile(
             leading: CircleAvatar(
