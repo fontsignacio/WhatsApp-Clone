@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
+import 'package:whatsapp_clone/pages/camera.dart';
 
 class Status extends StatefulWidget {
   const Status({super.key});
@@ -51,7 +52,13 @@ class _StatusState extends State<Status> {
               child: Text(mystatus[0].time,
               style: const TextStyle(color: Colors.grey, fontSize: 15.0),
               ),
-            ),  
+            ), 
+          
+            onTap: () {
+              var router = MaterialPageRoute(
+              builder: (context) => const Camera());
+              Navigator.of(context).push(router);
+            }
           ),
           
           Container(
@@ -123,11 +130,16 @@ class _StatusState extends State<Status> {
           )
         ]
       ),
-      
+          
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: const Icon(Icons.camera_alt_rounded, color: Colors.white,),
-        onPressed: (){}
+        onPressed: (){
+          var router = MaterialPageRoute(
+          builder: (context) => const Camera()); 
+          Navigator.of(context).push(router);
+        }
+
       )
     );
   }

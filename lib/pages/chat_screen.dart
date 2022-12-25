@@ -172,8 +172,8 @@ class Avatar extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           var router = MaterialPageRoute(
-            builder: (context) => const MyApp()); 
-            Navigator.of(context).push(router);
+          builder: (context) => const MyApp()); 
+          Navigator.of(context).push(router);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
