@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/main.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
 
 
@@ -54,7 +55,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 _isTyped = text.isNotEmpty;
               });
             },
-            decoration:const  InputDecoration.collapsed(hintText: "Message"),
+            decoration:const  InputDecoration.collapsed(hintText: " Message"),
           )
         ),
           IconButton(
@@ -70,7 +71,8 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Avatar(name: widget.name, imageUrl: widget.imageUrl),
+        leading: Avatar(imageUrl: widget.imageUrl),
+        title: Text(widget.name),
         
         actions: const [
             Padding(
@@ -138,14 +140,14 @@ class ChatMessage extends StatelessWidget {
           Container(
              margin: const EdgeInsets.only(right: 16.0),
              child: CircleAvatar(
-                backgroundImage: NetworkImage(imageUrl),
+                backgroundImage: NetworkImage(myUser[0].imageUrl),
             ),
           ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(name, style: Theme.of(context).textTheme.subtitle1),
+                Text(myUser[0].name, style: Theme.of(context).textTheme.subtitle1),
                 Container(
                   margin: const EdgeInsets.only(top: 5.0),
                   child: Text(text),
@@ -160,26 +162,29 @@ class ChatMessage extends StatelessWidget {
   }
 }
 
+
 class Avatar extends StatelessWidget {
-  final String name;
   final String imageUrl;
-  const Avatar({super.key, required this.name, required this.imageUrl});
+  const Avatar({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          CircleAvatar(
-            radius: 18,
-            backgroundImage: NetworkImage(imageUrl),
-          ),
-          Text(name),
-        ],
-      ),
+    return GestureDetector(
+        onTap: () {
+          var router = MaterialPageRoute(
+            builder: (context) => const MyApp()); 
+            Navigator.of(context).push(router);
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+              const Icon(Icons.arrow_back),
+              CircleAvatar(
+                radius: 16,
+                backgroundImage: NetworkImage(imageUrl),
+              ),
+          ], 
+        ),
     );
   }
 }
-

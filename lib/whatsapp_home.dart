@@ -20,7 +20,7 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
   @override
   void initState(){
     super.initState();
-    controller = TabController(length: 4, vsync: this);
+    controller = TabController(length: 4, vsync: this, initialIndex: 1);
   }
 
   
@@ -32,11 +32,11 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
 
           actions: [
             const Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: EdgeInsets.only(right: 5),
               child: Icon(Icons.search),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 0),
               child: PopupMenuButton <MenuItem> (
                 onSelected: (value) => {
                   if(value == MenuItem.item1){

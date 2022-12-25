@@ -18,9 +18,6 @@ class _ChatListState extends State<ChatList> {
         itemCount: messageData.length,
         itemBuilder:(context, i) => Column(
           children: <Widget>[
-            const Divider(
-              height: 10.0,
-            ),
             ListTile(
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(messageData[i].imageUrl),
