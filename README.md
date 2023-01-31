@@ -9,6 +9,7 @@ Building a basic WhatsApp Clone in Flutter. Without Firebase.
 - Send Message
 - Status list
 - View status photo
+- Contact buttom 
 - Call list
 - Camera
 
