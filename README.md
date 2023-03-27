@@ -1,6 +1,6 @@
 # WhatsApp Clone
 
-Building a basic WhatsApp Clone in Flutter. Without Firebase.
+Building a basic WhatsApp Clone UI in Flutter. Without Firebase.
 
 ## App Features.
 
@@ -20,7 +20,7 @@ Building a basic WhatsApp Clone in Flutter. Without Firebase.
 
 ## Download Link
 
-Download the application with the QR code or by the [WhastApp Clone link](https://drive.google.com/file/d/1nwjjI_pn7uKbhpfqgcXLvRejUeRjHkmq/view?usp=share_link)
+Download the application with the QR code or by the [WhastApp Clone link](https://drive.google.com/file/d/1nwjjI_pn7uKbhpfqgcXLvRejUeRjHkmq/view?usp=share_link). Disable application security protocol.
 
 ![image](https://user-images.githubusercontent.com/93054257/227962410-3ccdbfd4-c4e1-44f6-8c31-723e776d0ab8.png)
 
