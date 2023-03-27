@@ -138,16 +138,16 @@ class ChatMessage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-             margin: const EdgeInsets.only(right: 16.0),
-             child: CircleAvatar(
-                backgroundImage: NetworkImage(myUser[0].imageUrl),
+            margin: const EdgeInsets.only(right: 16.0),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(myUser[0].imageUrl),
             ),
           ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(myUser[0].name, style: Theme.of(context).textTheme.subtitle1),
+                Text(myUser[0].name, style: Theme.of(context).textTheme.titleMedium),
                 Container(
                   margin: const EdgeInsets.only(top: 5.0),
                   child: Text(text),

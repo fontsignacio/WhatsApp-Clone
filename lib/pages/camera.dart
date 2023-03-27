@@ -8,7 +8,7 @@ class Camera extends StatelessWidget {
   Widget build(BuildContext context) {
   final photos = [];
 
-   return Scaffold(
+  return Scaffold(
       body: CameraCamera(
         onFile: (file) {
           photos.add(file);
