@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Widgets/images.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
+import 'package:whatsapp_clone/pages/chat_screen.dart';
+//import 'package:whatsapp_clone/widgets/images.dart';
+
 
 class Status extends StatefulWidget {
   const Status({super.key});
@@ -93,7 +97,7 @@ class _StatusState extends State<Status> {
 
             onTap: () {
               var router = MaterialPageRoute(
-              builder: (context) => Image.network(status[i].imgUrl));
+              builder: (context) => Images(name: status[i].name,imgUrl: status[i].imgUrl, time: status[i].time));
               Navigator.of(context).push(router);
             }
           
@@ -103,10 +107,6 @@ class _StatusState extends State<Status> {
             padding: const EdgeInsets.only(left: 15.0),
             child: const Text("Viewed updates", 
             style: TextStyle(color: Colors.grey, fontSize: 15)),
-          ),
-
-          const Divider(
-            height: 10.0, 
           ),
 
         for(int i = 3; i<=4 ; i++)
@@ -133,7 +133,7 @@ class _StatusState extends State<Status> {
 
             onTap: () {
               var router = MaterialPageRoute(
-              builder: (context) => Image.network(status[i].imgUrl));
+              builder: (context) => Images(name: status[i].name,imgUrl: status[i].imgUrl, time: status[i].time));
               Navigator.of(context).push(router);
             }
           )
@@ -150,6 +150,56 @@ class _StatusState extends State<Status> {
         }
 
       )
+    );
+  }
+}
+
+class Images extends StatelessWidget {
+  const Images({
+    super.key,
+    required this.name,
+    required this.imgUrl,
+    required this.time
+  });
+  final String imgUrl;
+  final String name;
+  final String time;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: ListTile(
+            leading: CircleAvatar(
+                backgroundImage: NetworkImage(imgUrl), 
+                radius: 22.0,               
+            ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text(name,
+              style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),  
+            ),
+            ]),
+            subtitle: Container(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Text(time,
+              style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+              ),
+            ),
+
+            onTap: () {
+              var router = MaterialPageRoute(
+              builder: (context) => ChatScreen(name: name, imageUrl: imgUrl));
+              Navigator.of(context).push(router);
+            }
+          ),
+        backgroundColor: Colors.black
+      ),
+      body:  Center(
+        child: Image.network(imgUrl),
+      ),
+      backgroundColor: Colors.black,
     );
   }
 }
