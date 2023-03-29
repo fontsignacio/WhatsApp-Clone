@@ -13,7 +13,19 @@ class Camera extends StatelessWidget {
         onFile: (file) {
           photos.add(file);
           var router = MaterialPageRoute(
-          builder: (context) => Image.file(file));
+          builder: (context) =>
+            SafeArea(
+              child: Scaffold(
+                appBar: AppBar(
+                  backgroundColor: Colors.black
+                ),
+                body:  Center(
+                  child: Image.file(file),
+                ),
+                backgroundColor: Colors.black,
+              )
+            )
+          );
           Navigator.of(context).push(router); 
         },
       )

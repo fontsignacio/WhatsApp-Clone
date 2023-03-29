@@ -25,12 +25,16 @@ class Calls extends StatelessWidget {
               ),
               subtitle: Container(
                 padding: const EdgeInsets.only(top: 5.0),  
-                child: Text(calls[i].time,
-                style: const TextStyle(color: Colors.grey, fontSize: 15.0),
-                ),
+                child: Row(
+                  children: [
+                    calls[i].calltype,
+                    Text(calls[i].time,
+                      style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+                    ),
+                  ],
+                )
               ),
               trailing: calls[i].icon,
-
               onTap: () {}
             )
           ]

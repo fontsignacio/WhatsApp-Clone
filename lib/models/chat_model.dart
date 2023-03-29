@@ -37,7 +37,7 @@ List<ChatModel> messageData = [
   ),
   ChatModel(
     name: "Ernesto Sales",
-    message: "Pudiste hacer el practico?",
+    message: "Could you do the homework?",
     time: "14:38",
     imageUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
   ),

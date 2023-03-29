@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/Widgets/images.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
 import 'package:whatsapp_clone/pages/chat_screen.dart';
-//import 'package:whatsapp_clone/widgets/images.dart';
 
 
 class Status extends StatefulWidget {
@@ -14,6 +12,15 @@ class Status extends StatefulWidget {
 }
 
 class _StatusState extends State<Status> {
+
+  var myimage= NetworkImage(mystatus[0].imgUrl);
+  var myname = Text(mystatus[0].name,
+              style: const TextStyle(fontWeight: FontWeight.bold)
+              );
+  var mytime = Text(mystatus[0].time,
+              style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+              );
+
   @override
   Widget build(BuildContext context) {
   return Scaffold(
@@ -23,8 +30,8 @@ class _StatusState extends State<Status> {
           ListTile(
             leading: CircleAvatar(
               child: CircleAvatar(
-                backgroundImage: NetworkImage(mystatus[0].imgUrl),
-                radius: 22.0,
+                backgroundImage: myimage,
+                radius: 22,
 
                 child: Container(
                   padding: const EdgeInsets.only(left: 20,top: 20),
@@ -47,15 +54,12 @@ class _StatusState extends State<Status> {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-              Text(mystatus[0].name,
-              style: const TextStyle(fontWeight: FontWeight.bold),  
+                myname
+              ]
             ),
-            ]),
             subtitle: Container(
               padding: const EdgeInsets.only(top: 5.0),
-              child: Text(mystatus[0].time,
-              style: const TextStyle(color: Colors.grey, fontSize: 15.0),
-              ),
+              child: mytime
             ), 
           
             onTap: () {
@@ -67,7 +71,7 @@ class _StatusState extends State<Status> {
           
           Container(
             padding: const EdgeInsets.only(left: 15.0),
-            child: const Text("Recent updates", 
+            child: const Text("\nRecent updates\n", 
             style: TextStyle(color: Colors.grey, fontSize: 15)),
           ),
 
@@ -75,19 +79,20 @@ class _StatusState extends State<Status> {
           ListTile(
             leading: CircleAvatar(
               backgroundColor: const Color.fromARGB(255, 37, 211, 102),
-              radius: 22.0, 
+              radius: 22,           
               child: CircleAvatar(
                 backgroundImage: NetworkImage(status[i].imgUrl), 
-                radius: 20.0,               
+                radius: 20,               
               )
             ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-              Text(status[i].name,
-              style: const TextStyle(fontWeight: FontWeight.bold),  
+                Text(status[i].name,
+                style: const TextStyle(fontWeight: FontWeight.bold)
+                )
+              ]
             ),
-            ]),
             subtitle: Container(
               padding: const EdgeInsets.only(top: 5.0),
               child: Text(status[i].time,
@@ -105,7 +110,7 @@ class _StatusState extends State<Status> {
 
           Container(
             padding: const EdgeInsets.only(left: 15.0),
-            child: const Text("Viewed updates", 
+            child: const Text("\nViewed updates\n", 
             style: TextStyle(color: Colors.grey, fontSize: 15)),
           ),
 
@@ -130,7 +135,6 @@ class _StatusState extends State<Status> {
               style: const TextStyle(color: Colors.grey, fontSize: 15.0),
               ),
             ),
-
             onTap: () {
               var router = MaterialPageRoute(
               builder: (context) => Images(name: status[i].name,imgUrl: status[i].imgUrl, time: status[i].time));
@@ -167,39 +171,41 @@ class Images extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: ListTile(
-            leading: CircleAvatar(
-                backgroundImage: NetworkImage(imgUrl), 
-                radius: 22.0,               
-            ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-              Text(name,
-              style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),  
-            ),
-            ]),
-            subtitle: Container(
-              padding: const EdgeInsets.only(top: 5.0),
-              child: Text(time,
-              style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: ListTile(
+              leading: CircleAvatar(
+                  backgroundImage: NetworkImage(imgUrl), 
+                  radius: 22.0,               
               ),
-            ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                Text(name,
+                style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),  
+              ),
+              ]),
+              subtitle: Container(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Text(time,
+                style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+                ),
+              ),
 
-            onTap: () {
-              var router = MaterialPageRoute(
-              builder: (context) => ChatScreen(name: name, imageUrl: imgUrl));
-              Navigator.of(context).push(router);
-            }
-          ),
-        backgroundColor: Colors.black
-      ),
-      body:  Center(
-        child: Image.network(imgUrl),
-      ),
-      backgroundColor: Colors.black,
+              onTap: () {
+                var router = MaterialPageRoute(
+                builder: (context) => ChatScreen(name: name, imageUrl: imgUrl));
+                Navigator.of(context).push(router);
+              }
+            ),
+          backgroundColor: Colors.black
+        ),
+        body:  Center(
+          child: Image.network(imgUrl),
+        ),
+        backgroundColor: Colors.black,
+      )
     );
   }
 }
