@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
@@ -157,8 +158,7 @@ class _StatusState extends State<Status> {
     );
   }
 }
-
-class Images extends StatelessWidget {
+class Images extends StatefulWidget {
   const Images({
     super.key,
     required this.name,
@@ -170,39 +170,121 @@ class Images extends StatelessWidget {
   final String time;
 
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: ListTile(
-              leading: CircleAvatar(
-                  backgroundImage: NetworkImage(imgUrl), 
-                  radius: 22.0,               
-              ),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                Text(name,
-                style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),  
-              ),
-              ]),
-              subtitle: Container(
-                padding: const EdgeInsets.only(top: 5.0),
-                child: Text(time,
-                style: const TextStyle(color: Colors.grey, fontSize: 15.0),
-                ),
-              ),
+  State<Images> createState() => _ImagesState();
+}
 
-              onTap: () {
-                var router = MaterialPageRoute(
-                builder: (context) => ChatScreen(name: name, imageUrl: imgUrl));
-                Navigator.of(context).push(router);
-              }
+class _ImagesState extends State<Images> with TickerProviderStateMixin {
+  late AnimationController controller;
+  bool determinate = false;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..addListener(() {
+      setState(() {
+        
+      });
+    });
+    controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        Navigator.of(context).pop();
+      }
+    });
+    controller.forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return  SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            LinearProgressIndicator(
+              value: controller.value,
+              color: Colors.white,
+              backgroundColor: Colors.grey,
             ),
-          backgroundColor: Colors.black
-        ),
-        body:  Center(
-          child: Image.network(imgUrl),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  )
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    //fixedSize: const Size.fromWidth(double.infinity),
+                  ),
+                  onPressed: (() {
+                    var router = MaterialPageRoute(
+                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl));
+                    Navigator.of(context).push(router);
+                  }),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(widget.imgUrl), 
+                        radius: 22.0,               
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Column(
+                          children: [
+                            Text(widget.name,
+                              style: const TextStyle(color: Colors.grey, 
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17
+                              ),  
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Text(widget.time,
+                              style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+                              ),
+                            ),
+                          ],
+                        )
+                      )
+                    ],
+                  ),
+                )  
+              ],
+            ),    
+            SafeArea(
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (determinate == false) {
+                        controller.stop();
+                        determinate = true;
+                      } else {
+                        determinate = false;
+                        controller
+                          ..forward(from: controller.value)
+                          ..repeat();
+                    }
+                  });
+                },
+                child: Image.network(widget.imgUrl,
+                  fit: BoxFit.contain,
+                  scale: 1,
+                  height: 600,
+                ),
+              )
+            ), 
+          ],
         ),
         backgroundColor: Colors.black,
       )
