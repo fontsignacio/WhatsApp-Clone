@@ -72,7 +72,7 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
           ],
           
           bottom: TabBar(
-            indicatorColor: const Color.fromARGB(255, 37, 211, 102),
+            indicatorColor: Colors.white,
             tabs: const <Widget>[
               Tab(icon: Icon(Icons.camera_alt_rounded)),
               Tab(text: "CHAT"),

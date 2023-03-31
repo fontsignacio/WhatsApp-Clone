@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
@@ -27,31 +26,32 @@ class _StatusState extends State<Status> {
   return Scaffold(
       body: ListView(
         children: <Widget>[ 
-
           ListTile(
             leading: CircleAvatar(
+              radius: 26,
               child: CircleAvatar(
                 backgroundImage: myimage,
-                radius: 22,
-
+                radius: 26,
                 child: Container(
-                  padding: const EdgeInsets.only(left: 20,top: 20),
+                  padding: const EdgeInsets.only(left: 26,top: 26),
                   width: 60, 
                   height: 60,
                   child: Container(
-                  padding: const EdgeInsets.all(0.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(60 / 2),
-                  ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(60 / 2),
+                    ),
                     child: const Center(
-                      child: Icon(Icons.add_circle,color: Color.fromARGB(255, 37, 211, 102), size: 20),
+                      child: Icon(
+                        Icons.add_circle,
+                        color: Color.fromARGB(255, 37, 211, 102),
+                        size: 26
+                      ),
                     )
                   ),
                 ),
               )
             ),
-
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -62,29 +62,35 @@ class _StatusState extends State<Status> {
               padding: const EdgeInsets.only(top: 5.0),
               child: mytime
             ), 
-          
             onTap: () {
               var router = MaterialPageRoute(
               builder: (context) => const Camera());
               Navigator.of(context).push(router);
             }
           ),
-          
+          const SizedBox(height: 5),
           Container(
             padding: const EdgeInsets.only(left: 15.0),
-            child: const Text("\nRecent updates\n", 
+            child: const Text("Recent updates", 
             style: TextStyle(color: Colors.grey, fontSize: 15)),
           ),
-
+          const SizedBox(height: 5),
         for(int i = 0; i<=2 ; i++)
           ListTile(
-            leading: CircleAvatar(
-              backgroundColor: const Color.fromARGB(255, 37, 211, 102),
-              radius: 22,           
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(status[i].imgUrl), 
-                radius: 20,               
-              )
+            leading: Container(
+              padding: const EdgeInsets.all(1.5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(26),
+                border: Border.all(color: const Color.fromARGB(255, 37, 211, 102), width: 3),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(26),
+                child: Image.network(status[i].imgUrl,
+                  height: 45,
+                  width: 45,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,20 +114,29 @@ class _StatusState extends State<Status> {
             }
           
           ),
-
+          const SizedBox(height: 5),
           Container(
             padding: const EdgeInsets.only(left: 15.0),
-            child: const Text("\nViewed updates\n", 
+            child: const Text("Viewed updates", 
             style: TextStyle(color: Colors.grey, fontSize: 15)),
           ),
-
+          const SizedBox(height: 5),
         for(int i = 3; i<=4 ; i++)
           ListTile(
-            leading: CircleAvatar(
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(status[i].imgUrl), 
-                radius: 22.0,               
-              )
+            leading: Container(
+              padding: const EdgeInsets.all(1.5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(26),
+                border: Border.all(color: Colors.grey, width: 3),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(26),
+                child: Image.network(status[i].imgUrl,
+                  height: 45,
+                  width: 45,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,6 +224,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
         body: Column(
           children: [
             LinearProgressIndicator(
+              minHeight: 2, 
               value: controller.value,
               color: Colors.white,
               backgroundColor: Colors.grey,
@@ -225,46 +241,64 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
-                    //fixedSize: const Size.fromWidth(double.infinity),
                   ),
                   onPressed: (() {
                     var router = MaterialPageRoute(
                     builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl));
                     Navigator.of(context).push(router);
                   }),
-                  child: Row(
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 21,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(26),
+                      child: Image.network(widget.imgUrl,
+                        height: 40,
+                        width: 40,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                  ),
+                  onPressed: (() {
+                    var router = MaterialPageRoute(
+                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl));
+                    Navigator.of(context).push(router);
+                  }),
+                  child: Stack(
                     children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(widget.imgUrl), 
-                        radius: 22.0,               
+                      Container(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child:  Text(widget.name,
+                            style: const TextStyle(color: Colors.grey, 
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18
+                            ),  
+                          )
+                        
                       ),
                       Container(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: Column(
-                          children: [
-                            Text(widget.name,
-                              style: const TextStyle(color: Colors.grey, 
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17
-                              ),  
+                        padding: const EdgeInsets.only(top: 20),
+                        child:  Text(widget.time,
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 13.0
                             ),
-                            Container(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Text(widget.time,
-                              style: const TextStyle(color: Colors.grey, fontSize: 15.0),
-                              ),
-                            ),
-                          ],
-                        )
+                          ),
+                        
                       )
                     ],
-                  ),
-                )  
+                  )
+                ),
               ],
             ),    
             SafeArea(
               child: GestureDetector(
-                onTap: () {
+                onTap: () {     
                   setState(() {
                     if (determinate == false) {
                         controller.stop();
@@ -272,8 +306,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                       } else {
                         determinate = false;
                         controller
-                          ..forward(from: controller.value)
-                          ..repeat();
+                          .forward(from: controller.value);
                     }
                   });
                 },
@@ -291,3 +324,25 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
     );
   }
 }
+
+/*
+Container(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Column(
+                          children: [
+                            Text(widget.name,
+                              style: const TextStyle(color: Colors.grey, 
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18
+                              ),  
+                            ),
+                            Text(widget.time,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 13.0
+                              ),
+                            ),
+                          ],
+                        )
+                      )
+*/

@@ -19,9 +19,17 @@ class _ChatListState extends State<ChatList> {
         itemBuilder:(context, i) => Column(
           children: <Widget>[
             ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(messageData[i].imageUrl),
+              leading: Container(
+              padding: const EdgeInsets.all(1.5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(26),
+                child: Image.network(messageData[i].imageUrl,
+                  height: 45,
+                  width: 45,
+                  fit: BoxFit.cover,
+                ),
               ),
+            ),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[

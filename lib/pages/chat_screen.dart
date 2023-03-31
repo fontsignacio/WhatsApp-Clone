@@ -45,19 +45,20 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
   Widget _buildTextComposer(){
     return IconTheme(
-    data: IconThemeData(color: Theme.of(context).colorScheme.secondary),  
-    child: Row(
-      children:<Widget>[
-          Flexible(child: TextField(
-            controller: _textController,
-            onChanged: (String text) {
-              setState(() {
-                _isTyped = text.isNotEmpty;
-              });
-            },
-            decoration:const  InputDecoration.collapsed(hintText: " Message"),
-          )
-        ),
+      data: IconThemeData(color: Theme.of(context).colorScheme.secondary),  
+      child: Row(
+        children:<Widget>[
+          Flexible(
+            child: TextField(
+              controller: _textController,
+              onChanged: (String text) {
+                setState(() {
+                  _isTyped = text.isNotEmpty;
+                });
+              },
+              decoration:const  InputDecoration.collapsed(hintText: " Message"),
+            )
+          ),
           IconButton(
             onPressed: _isTyped ? () => _handledSubmit(_textController.text) : null, 
             icon: const Icon(Icons.send),

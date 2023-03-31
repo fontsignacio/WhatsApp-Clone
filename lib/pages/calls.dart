@@ -12,9 +12,17 @@ class Calls extends StatelessWidget {
         itemBuilder:(context, i) => Column(
           children: <Widget>[
             ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(calls[i].imgUrl),
+              leading: Container(
+              padding: const EdgeInsets.all(1.5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(26),
+                child: Image.network(calls[i].imgUrl,
+                  height: 45,
+                  width: 45,
+                  fit: BoxFit.cover,
+                ),
               ),
+            ),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
