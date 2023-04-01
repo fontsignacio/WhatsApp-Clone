@@ -266,7 +266,7 @@ class ChatMessage extends StatelessWidget {
       ),
       child: Container(
         alignment: Alignment.centerRight,
-        margin: const EdgeInsets.only(top: 20, bottom: 15, left: 40),
+        margin: const EdgeInsets.only(top: 10, bottom: 0, left: 40, right:  10),
         child: ClipPath(
           clipper: UpperNipMessageClipperTwo(MessageType.send),
           child: Container(
@@ -277,12 +277,13 @@ class ChatMessage extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(text,
-                  //textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 17),
+                Expanded(
+                    child: Text(text,
+                    style: const TextStyle(fontSize: 17),
+                  ),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10, top: 10),
+                Container( 
+                  padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                   child: Row(
                     children: [
                       Text(timeNow,
