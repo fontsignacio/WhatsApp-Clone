@@ -109,7 +109,12 @@ class _StatusState extends State<Status> {
 
             onTap: () {
               var router = MaterialPageRoute(
-              builder: (context) => Images(name: status[i].name,imgUrl: status[i].imgUrl, time: status[i].time));
+              builder: (context) => Images(name: status[i].name,
+                  imgUrl: status[i].imgUrl,
+                  time: status[i].time,
+                  index: i
+                )
+              );
               Navigator.of(context).push(router);
             }
           
@@ -153,7 +158,12 @@ class _StatusState extends State<Status> {
             ),
             onTap: () {
               var router = MaterialPageRoute(
-              builder: (context) => Images(name: status[i].name,imgUrl: status[i].imgUrl, time: status[i].time));
+              builder: (context) => Images(name: status[i].name,
+                imgUrl: status[i].imgUrl,
+                time: status[i].time,
+                index: i,
+              )
+            );
               Navigator.of(context).push(router);
             }
           )
@@ -178,11 +188,14 @@ class Images extends StatefulWidget {
     super.key,
     required this.name,
     required this.imgUrl,
-    required this.time
+    required this.time,
+    required this.index
   });
   final String imgUrl;
   final String name;
   final String time;
+  final int index;
+
 
   @override
   State<Images> createState() => _ImagesState();
@@ -244,7 +257,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                   ),
                   onPressed: (() {
                     var router = MaterialPageRoute(
-                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl));
+                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl, index: widget.index, ));
                     Navigator.of(context).push(router);
                   }),
                   child: CircleAvatar(
@@ -266,7 +279,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                   ),
                   onPressed: (() {
                     var router = MaterialPageRoute(
-                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl));
+                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl, index: widget.index,));
                     Navigator.of(context).push(router);
                   }),
                   child: Stack(
@@ -324,25 +337,3 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
     );
   }
 }
-
-/*
-Container(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: Column(
-                          children: [
-                            Text(widget.name,
-                              style: const TextStyle(color: Colors.grey, 
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18
-                              ),  
-                            ),
-                            Text(widget.time,
-                              style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 13.0
-                              ),
-                            ),
-                          ],
-                        )
-                      )
-*/

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/contact_model.dart';
 import 'package:whatsapp_clone/pages/chat_screen.dart'; 
 
-
 class Contacts extends StatefulWidget {
   const Contacts({super.key});
 
@@ -39,7 +38,12 @@ class _ContactsState extends State<Contacts> {
             ), 
               onTap: (() {
                 var router = MaterialPageRoute(
-                  builder: ((context) => ChatScreen(name: contact[i].name, imageUrl: contact[i].imgUrl,)));
+                  builder: ((context) => ChatScreen(name: contact[i].name,
+                      imageUrl: contact[i].imgUrl,
+                      index: i,
+                    )
+                  )
+                );
                   Navigator.of(context).push(router);
               })
             )

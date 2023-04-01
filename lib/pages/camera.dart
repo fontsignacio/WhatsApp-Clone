@@ -17,10 +17,14 @@ class Camera extends StatelessWidget {
             SafeArea(
               child: Scaffold(
                 appBar: AppBar(
-                  backgroundColor: Colors.black
+                  backgroundColor: Colors.black,
                 ),
                 body:  Center(
-                  child: Image.file(file),
+                  child: Image.file(file,
+                    fit: BoxFit.cover,
+                    scale: 1,
+                    height: 600
+                  ),
                 ),
                 backgroundColor: Colors.black,
               )

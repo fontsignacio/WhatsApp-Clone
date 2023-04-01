@@ -36,19 +36,25 @@ class _ChatListState extends State<ChatList> {
                 Text(messageData[i].name,
                 style: const TextStyle(fontWeight: FontWeight.bold),  
               ),
-                Text(messageData[i].time,
+                Text(messageData[i].timeNow,
                 style: const TextStyle(color: Colors.grey, fontSize: 14.0)
               )
               ]),
               subtitle: Container(
                 padding: const EdgeInsets.only(top: 5.0),
-                child: Text(messageData[i].message,
+                child: Text(messageData[i].newMessage,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(color: Colors.grey, fontSize: 15.0),
                 ),
               ),
               onTap: (() {
                 var router = MaterialPageRoute(
-                  builder: ((context) => ChatScreen(name: messageData[i].name, imageUrl: messageData[i].imageUrl,)));
+                  builder: ((context) => ChatScreen(name: messageData[i].name,
+                      imageUrl: messageData[i].imageUrl,
+                      index: i,
+                    )
+                  )
+                );
                   Navigator.of(context).push(router);
               }
             ))

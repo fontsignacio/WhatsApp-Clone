@@ -1,12 +1,19 @@
+import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/main.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
-
+import 'package:intl/intl.dart';
+import 'package:whatsapp_clone/pages/camera.dart';
 
 class ChatScreen extends StatefulWidget {
   final String name;
   final String imageUrl;
-  const ChatScreen({super.key, required this.name, required this.imageUrl});
+  final int index;
+  const ChatScreen({super.key,
+    required this.name,
+    required this.imageUrl,
+    required this.index,
+  });
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -15,6 +22,10 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final TextEditingController _textController = TextEditingController();
   final List<ChatMessage> _messages = <ChatMessage>[];
+  final String timeNow = DateFormat.Hm().format(DateTime.now());
+  Widget iconsText = const Icon(Icons.send,color: Colors.white,size: 30); 
+  Widget iconAudio = const Icon(Icons.mic,color: Colors.white,size: 30);
+  Widget icon = const Icon(Icons.mic,color: Colors.white,size: 30);
   bool _isTyped = false;
 
   void _handledSubmit(String text){
@@ -22,6 +33,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
     setState(() {
       _isTyped = false;
+      icon = iconAudio;
     });
     
     ChatMessage message = ChatMessage(
@@ -30,14 +42,16 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
         duration: const Duration(milliseconds: 700),
         vsync: this),
       name: widget.name,
-      imageUrl: widget.imageUrl
-    
+      imageUrl: widget.imageUrl,
+      timeNow: timeNow,
     );
 
-    setState(() {
+
+    setState(() { 
       _messages.insert(0, message);
       var data = messageData.firstWhere((t) => t.name == widget.name);
-      data.message = message.text; 
+      data.newMessage = message.text; 
+      data.timeNow = timeNow;
     });
     
     message.animationController.forward();
@@ -49,38 +63,96 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       child: Row(
         children:<Widget>[
           Flexible(
-            child: TextField(
-              controller: _textController,
-              onChanged: (String text) {
-                setState(() {
-                  _isTyped = text.isNotEmpty;
-                });
-              },
-              decoration:const  InputDecoration.collapsed(hintText: " Message"),
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 100),
+              padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
+              child: Theme(
+                data: Theme.of(context).copyWith(primaryColor: Colors.white),
+                child: SingleChildScrollView(
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1,
+                    maxLines: 2,
+                    controller: _textController,
+                    onChanged: (String text) {
+                      setState(() {
+                        _isTyped = text.isNotEmpty;
+                        if(_isTyped){
+                          icon = iconsText;
+                        }else{
+                          icon = iconAudio;
+                        }
+                      });
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.insert_emoticon,size: 30, color: Colors.grey),
+                      hintText: "Message",
+                      suffixIcon: IconButton(                
+                        icon: const Icon(Icons.camera_alt,
+                          size: 30,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          var router = MaterialPageRoute(
+                          builder: (context) => const Camera()); 
+                          Navigator.of(context).push(router);
+                        },
+                      ),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      ),
+                      focusColor: Colors.grey,
+                      fillColor: Colors.white,
+                      filled: true,
+                    ),
+                  ),
+                )
+              ),
             )
           ),
-          IconButton(
-            onPressed: _isTyped ? () => _handledSubmit(_textController.text) : null, 
-            icon: const Icon(Icons.send),
-          )
+          GestureDetector(
+            onTap: _isTyped ? () => _handledSubmit(_textController.text) : null, 
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              margin:const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 7, 94, 84),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Center(
+                child: icon
+              )
+            ),          
+          ),
         ],
       )
     );
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: Avatar(imageUrl: widget.imageUrl),
-        title: Text(widget.name),
-        
+        title: Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(widget.name),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 25),
+              child: const  Text("online",
+              style: TextStyle(color: Colors.white70,fontStyle: FontStyle.italic, fontSize: 15.0))
+            )     
+          ],
+        ),
         actions: const [
             Padding(
               padding: EdgeInsets.only(right: 20),
               child: Icon(Icons.videocam_rounded),
             ),
-
             Padding(
               padding: EdgeInsets.only(right: 15),
               child: Icon(Icons.call),
@@ -91,25 +163,81 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             ),
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          Flexible(
-            child:  ListView.builder(
-              padding: const EdgeInsets.all(8.0),
-              reverse: true,
-              itemBuilder: (_, int index) => _messages[index],
-              itemCount: _messages.length,
+      body: Container(
+        decoration: const  BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+              "https://i.pinimg.com/originals/8f/ba/cb/8fbacbd464e996966eb9d4a6b7a9c21e.jpg"
             ),
-          ),
-          const Divider(height: 1.0),
-          Container(
-            child: _buildTextComposer(),
+            fit: BoxFit.fitWidth
           )
-        ],
+        ),
+        child: Column(
+          children: <Widget>[ 
+            Container(
+              width: 300,
+              margin: const EdgeInsets.only(bottom: 20, top: 10),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const  Color(0XFFFFF3C2),
+                borderRadius: BorderRadius.circular(5),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 8
+                  )
+                ]
+              ),
+              child: const Text(
+                "When you send messages or make calls using end-to-end encryption, the content is secure and can only be accessed by the intended recipient, ensuring privacy and security.",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 10),
+              alignment: Alignment.centerLeft,
+              child: ClipPath(
+                clipper: UpperNipMessageClipperTwo(MessageType.receive),
+                child: Container(
+                  padding: const EdgeInsets.only(top: 10, bottom: 10,left: 25, right:  10),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(messageData[widget.index].message,
+                        style: const TextStyle(fontSize: 17),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left: 10, top: 10),
+                        child: Text(messageData[widget.index].time,
+                        style: const TextStyle(fontSize: 10.0))
+                      )
+                    ],
+                  )
+                ),
+              )        
+            ),      
+            Flexible(
+              child: ListView.builder(
+                padding: const EdgeInsets.only(top: 5, bottom: 0,left: 5, right:  0),
+                reverse: true,
+                itemBuilder: (_, int index) => _messages[index],
+                itemCount: _messages.length,
+              ),
+            ),
+            Container(
+              child: _buildTextComposer(),
+            )
+          ],
+        )
       )
     );
   }
 }
+
 
 class ChatMessage extends StatelessWidget {
 
@@ -118,13 +246,15 @@ class ChatMessage extends StatelessWidget {
     required this.text,
     required this.animationController,
     required this.name,
-    required this.imageUrl
+    required this.imageUrl,
+    required this.timeNow
   });
 
   final String text;
   final AnimationController animationController;
   final String name; 
   final String imageUrl;
+  final String timeNow;
 
 
   @override
@@ -132,37 +262,49 @@ class ChatMessage extends StatelessWidget {
     return SizeTransition(
       sizeFactor: CurvedAnimation(
         parent: animationController,  
-        curve: Curves.easeOut),
+        curve: Curves.easeOut
+      ),
       child: Container(
-      margin:  const EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(right: 16.0),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(myUser[0].imageUrl),
+        alignment: Alignment.centerRight,
+        margin: const EdgeInsets.only(top: 20, bottom: 15, left: 40),
+        child: ClipPath(
+          clipper: UpperNipMessageClipperTwo(MessageType.send),
+          child: Container(
+            padding: const EdgeInsets.only(top: 10, bottom: 10,left: 10, right:  20),
+            decoration: const BoxDecoration(
+              color: Color(0XFFE4FDCA),
             ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(myUser[0].name, style: Theme.of(context).textTheme.titleMedium),
-                Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: Text(text),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(text,
+                  //textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 17),
                 ),
+                Container(
+                  padding: const EdgeInsets.only(left: 10, top: 10),
+                  child: Row(
+                    children: [
+                      Text(timeNow,
+                        style: const TextStyle(fontSize: 10.0)
+                      ),
+                      const SizedBox(width: 5),
+                      const Icon(
+                        Icons.done_all,
+                        size: 15,
+                        color: Colors.blue,
+                      ),
+                    ],
+                  )
+                )
               ],
             )
-          )
-        ],
-      ),
+          ),
+        ),
       ),
     );
   }
 }
-
 
 class Avatar extends StatelessWidget {
   final String imageUrl;
