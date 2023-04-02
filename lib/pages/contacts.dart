@@ -24,10 +24,10 @@ class _ContactsState extends State<Contacts> {
               leading: Container(
                 padding: const EdgeInsets.all(1.5),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
+                  borderRadius: BorderRadius.circular(25),
                   child: Image.asset(contact[i].imgUrl,
-                    height: 50,
-                    width: 50,
+                    height: 40,
+                    width: 40,
                     fit: BoxFit.cover,
                   ),
                 ),
