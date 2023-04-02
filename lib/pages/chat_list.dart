@@ -42,9 +42,14 @@ class _ChatListState extends State<ChatList> {
               ]),
               subtitle: Container(
                 padding: const EdgeInsets.only(top: 5.0),
-                child: Text(messageData[i].newMessage,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+                child: Row(
+                  children: [
+                    messageData[i].send,
+                    Text(messageData[i].newMessage,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+                    ),
+                  ],
                 ),
               ),
               onTap: (() {

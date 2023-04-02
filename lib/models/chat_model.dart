@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ChatModel{
   final String name;
   String message;
@@ -5,6 +7,7 @@ class ChatModel{
   final String imageUrl;
   late String newMessage; 
   late String timeNow;
+  Widget send;
 
   ChatModel({
     required this.name,
@@ -13,6 +16,7 @@ class ChatModel{
     required this.imageUrl,
     required this.newMessage,
     required this.timeNow,
+    required this.send, 
   });
 }
 
@@ -23,7 +27,8 @@ List<ChatModel> messageData = [
     time: "15:30",
     imageUrl: "assets/images/photo2.jpg",
     newMessage: "Hi bro",
-    timeNow: "15:30"
+    timeNow: "15:30",
+    send: const Text(""),
   ),
   ChatModel(
     name: "Jacinto Pedraza",
@@ -31,7 +36,8 @@ List<ChatModel> messageData = [
     time: "14:30",
     imageUrl: "assets/images/photo3.jpg",
     newMessage: "My boy are you good?",
-    timeNow: "15:30"
+    timeNow: "14:30",
+    send: const Text(""),
   ),
   ChatModel(
     name: "Jose Maria Gomez",
@@ -39,7 +45,8 @@ List<ChatModel> messageData = [
     time: "19:50",
     imageUrl: "assets/images/photo8.jpg",
     newMessage: "You're the king of the football",
-    timeNow: "15:30"
+    timeNow: "19:50",
+    send: const Text(""),
   ),
   ChatModel(
     name: "Ernesto Sales",
@@ -47,7 +54,8 @@ List<ChatModel> messageData = [
     time: "14:38",
     imageUrl: "assets/images/photo4.jpg",
     newMessage: "Could you do the homework?",
-    timeNow: "15:30"
+    timeNow: "14:38",
+    send: const Text(""),
   ),
   ChatModel(
     name: "Edmundo Loandos",
@@ -55,7 +63,8 @@ List<ChatModel> messageData = [
     time: "12:30",
     imageUrl: "assets/images/photo5.jpg",
     newMessage: "How I can Help?",
-    timeNow: "15:30"
+    timeNow: "12:30",
+    send: const Text(""),
   ),
   ChatModel(
     name: "Juan Sierra",
@@ -63,7 +72,8 @@ List<ChatModel> messageData = [
     time: "04:30",
     imageUrl: "assets/images/photo6.jpg",
     newMessage: "Are you ok? friend",
-    timeNow: "15:30"
+    timeNow: "04:30",
+    send: const Text(""),
 
   ),
   ChatModel(
@@ -72,7 +82,8 @@ List<ChatModel> messageData = [
     time: "13:12",
     imageUrl: "assets/images/photo7.jpg",
     newMessage: "Hello",
-    timeNow: "15:30"
+    timeNow: "13:12",
+    send: const Text(""),
   ),
 
 ];

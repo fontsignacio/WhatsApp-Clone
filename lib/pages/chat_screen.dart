@@ -54,6 +54,10 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       var data = messageData.firstWhere((t) => t.name == widget.name);
       data.newMessage = message.text; 
       data.timeNow = timeNow;
+      data.send = const Padding(
+        padding: EdgeInsets.only(right: 3),
+        child: Icon(Icons.done_all,size: 20,color: Colors.blue),
+      );
     });
     
     message.animationController.forward();
@@ -87,7 +91,11 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                       });
                     },
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.insert_emoticon,size: 30, color: Colors.grey),
+                      prefixIcon: const Icon(
+                        Icons.insert_emoticon,
+                        size: 30,
+                        color: Colors.grey
+                      ),
                       hintText: "Message",
                       border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30.0)),
@@ -98,10 +106,15 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                         children: <Widget>[
                           Transform.rotate(
                             angle: 180,
-                            child: const Icon(Icons.attachment_outlined,size: 30, color: Colors.grey),
+                            child: const Icon(
+                              Icons.attachment_outlined,
+                              size: 30, 
+                              color: Colors.grey
+                            ),
                           ),
                           IconButton(                
-                            icon: const Icon(Icons.camera_alt_rounded,
+                            icon: const Icon(
+                              Icons.camera_alt_rounded,
                               size: 30,
                               color: Colors.grey,
                             ),
@@ -112,7 +125,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                             },
                           ),
                         ],
-                      ),                    
+                      ),               
                       focusColor: Colors.grey,
                       fillColor: Colors.white,
                       filled: true,
@@ -263,7 +276,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             ),               
             Flexible(
               child: ListView.builder(
-                padding: const EdgeInsets.only(left: 5, bottom: 300),
+                padding: const EdgeInsets.only(left: 5, bottom: 270),
                 reverse: true,
                 itemBuilder: (_, int index) => _messages[index],
                 itemCount: _messages.length,
