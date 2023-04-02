@@ -20,16 +20,16 @@ class _ChatListState extends State<ChatList> {
           children: <Widget>[
             ListTile(
               leading: Container(
-              padding: const EdgeInsets.all(1.5),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(26),
-                child: Image.network(messageData[i].imageUrl,
-                  height: 45,
-                  width: 45,
-                  fit: BoxFit.cover,
+                padding: const EdgeInsets.all(1.5),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image.asset(messageData[i].imageUrl,
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -43,19 +43,20 @@ class _ChatListState extends State<ChatList> {
               subtitle: Container(
                 padding: const EdgeInsets.only(top: 5.0),
                 child: Text(messageData[i].newMessage,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Colors.grey, fontSize: 15.0),
                 ),
               ),
               onTap: (() {
                 var router = MaterialPageRoute(
-                  builder: ((context) => ChatScreen(name: messageData[i].name,
+                  builder: ((context) => ChatScreen(
+                      name: messageData[i].name,
                       imageUrl: messageData[i].imageUrl,
                       index: i,
                     )
                   )
                 );
-                  Navigator.of(context).push(router);
+                Navigator.of(context).push(router);
               }
             ))
           ]
@@ -67,8 +68,8 @@ class _ChatListState extends State<ChatList> {
         child: const Icon(Icons.message, color: Colors.white,),
         onPressed: (){
           var router = MaterialPageRoute(
-            builder: (context) => const Contacts());
-            Navigator.of(context).push(router);
+          builder: (context) => const Contacts());
+          Navigator.of(context).push(router);
         }
       ),
     );

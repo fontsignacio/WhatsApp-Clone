@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
-import 'package:whatsapp_clone/pages/chat_screen.dart';
-
+import '../widgets/images.dart';
+import '../widgets/images.dart';
 
 class Status extends StatefulWidget {
   const Status({super.key});
@@ -13,7 +13,7 @@ class Status extends StatefulWidget {
 
 class _StatusState extends State<Status> {
 
-  var myimage= NetworkImage(mystatus[0].imgUrl);
+  var myimage= AssetImage(mystatus[0].imgUrl);
   var myname = Text(mystatus[0].name,
               style: const TextStyle(fontWeight: FontWeight.bold)
               );
@@ -80,14 +80,14 @@ class _StatusState extends State<Status> {
             leading: Container(
               padding: const EdgeInsets.all(1.5),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(26),
+                borderRadius: BorderRadius.circular(40),
                 border: Border.all(color: const Color.fromARGB(255, 37, 211, 102), width: 3),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(26),
-                child: Image.network(status[i].imgUrl,
-                  height: 45,
-                  width: 45,
+                borderRadius: BorderRadius.circular(40),
+                child: Image.asset(status[i].imgUrl,
+                  height: 50,
+                  width: 50,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -131,14 +131,14 @@ class _StatusState extends State<Status> {
             leading: Container(
               padding: const EdgeInsets.all(1.5),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(26),
+                borderRadius: BorderRadius.circular(40),
                 border: Border.all(color: Colors.grey, width: 3),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(26),
-                child: Image.network(status[i].imgUrl,
-                  height: 45,
-                  width: 45,
+                borderRadius: BorderRadius.circular(40),
+                child: Image.asset(status[i].imgUrl,
+                  height: 50,
+                  width: 50,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -179,160 +179,6 @@ class _StatusState extends State<Status> {
           Navigator.of(context).push(router);
         }
 
-      )
-    );
-  }
-}
-class Images extends StatefulWidget {
-  const Images({
-    super.key,
-    required this.name,
-    required this.imgUrl,
-    required this.time,
-    required this.index
-  });
-  final String imgUrl;
-  final String name;
-  final String time;
-  final int index;
-
-
-  @override
-  State<Images> createState() => _ImagesState();
-}
-
-class _ImagesState extends State<Images> with TickerProviderStateMixin {
-  late AnimationController controller;
-  bool determinate = false;
-
-  @override
-  void initState() {
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 5),
-    )..addListener(() {
-      setState(() {
-        
-      });
-    });
-    controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        Navigator.of(context).pop();
-      }
-    });
-    controller.forward();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return  SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            LinearProgressIndicator(
-              minHeight: 2, 
-              value: controller.value,
-              color: Colors.white,
-              backgroundColor: Colors.grey,
-            ),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  )
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                  ),
-                  onPressed: (() {
-                    var router = MaterialPageRoute(
-                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl, index: widget.index, ));
-                    Navigator.of(context).push(router);
-                  }),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 21,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(26),
-                      child: Image.network(widget.imgUrl,
-                        height: 40,
-                        width: 40,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                  ),
-                  onPressed: (() {
-                    var router = MaterialPageRoute(
-                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl, index: widget.index,));
-                    Navigator.of(context).push(router);
-                  }),
-                  child: Stack(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child:  Text(widget.name,
-                            style: const TextStyle(color: Colors.grey, 
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18
-                            ),  
-                          )
-                        
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 20),
-                        child:  Text(widget.time,
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 13.0
-                            ),
-                          ),
-                        
-                      )
-                    ],
-                  )
-                ),
-              ],
-            ),    
-            SafeArea(
-              child: GestureDetector(
-                onTap: () {     
-                  setState(() {
-                    if (determinate == false) {
-                        controller.stop();
-                        determinate = true;
-                      } else {
-                        determinate = false;
-                        controller
-                          .forward(from: controller.value);
-                    }
-                  });
-                },
-                child: Image.network(widget.imgUrl,
-                  fit: BoxFit.contain,
-                  scale: 1,
-                  height: 600,
-                ),
-              )
-            ), 
-          ],
-        ),
-        backgroundColor: Colors.black,
       )
     );
   }

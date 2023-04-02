@@ -21,8 +21,16 @@ class _ContactsState extends State<Contacts> {
         itemBuilder:(context, i) => Column(
           children: <Widget>[
             ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(contact[i].imgUrl),
+              leading: Container(
+                padding: const EdgeInsets.all(1.5),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image.asset(contact[i].imgUrl,
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

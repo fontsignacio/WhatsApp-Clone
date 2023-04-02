@@ -1,9 +1,11 @@
-import 'package:custom_clippers/custom_clippers.dart';
-import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/main.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
-import 'package:intl/intl.dart';
+import 'package:custom_clippers/custom_clippers.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
+import 'package:flutter/material.dart';
+import '../widgets/message.dart';
+import 'package:intl/intl.dart';
+import '../widgets/avatar.dart';
+
 
 class ChatScreen extends StatefulWidget {
   final String name;
@@ -87,20 +89,30 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.insert_emoticon,size: 30, color: Colors.grey),
                       hintText: "Message",
-                      suffixIcon: IconButton(                
-                        icon: const Icon(Icons.camera_alt,
-                          size: 30,
-                          color: Colors.grey,
-                        ),
-                        onPressed: () {
-                          var router = MaterialPageRoute(
-                          builder: (context) => const Camera()); 
-                          Navigator.of(context).push(router);
-                        },
-                      ),
                       border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30.0)),
                       ),
+                      suffixIcon: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween, // added line
+                        mainAxisSize: MainAxisSize.min, // added line
+                        children: <Widget>[
+                          Transform.rotate(
+                            angle: 180,
+                            child: const Icon(Icons.attachment_outlined,size: 30, color: Colors.grey),
+                          ),
+                          IconButton(                
+                            icon: const Icon(Icons.camera_alt_rounded,
+                              size: 30,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              var router = MaterialPageRoute(
+                              builder: (context) => const Camera()); 
+                              Navigator.of(context).push(router);
+                            },
+                          ),
+                        ],
+                      ),                    
                       focusColor: Colors.grey,
                       fillColor: Colors.white,
                       filled: true,
@@ -108,7 +120,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                   ),
                 )
               ),
-            )
+            ),
           ),
           GestureDetector(
             onTap: _isTyped ? () => _handledSubmit(_textController.text) : null, 
@@ -139,12 +151,15 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
           children: [
             Container(
               padding: const EdgeInsets.only(bottom: 10),
-              child: Text(widget.name),
+                child: Text(widget.name,
+                  style: const TextStyle(fontWeight: FontWeight.bold
+                )
+              )
             ),
             Container(
               padding: const EdgeInsets.only(top: 25),
               child: const  Text("online",
-              style: TextStyle(color: Colors.white70,fontStyle: FontStyle.italic, fontSize: 15.0))
+              style: TextStyle(color: Colors.white, fontSize: 15.0))
             )     
           ],
         ),
@@ -166,14 +181,31 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       body: Container(
         decoration: const  BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              "https://i.pinimg.com/originals/8f/ba/cb/8fbacbd464e996966eb9d4a6b7a9c21e.jpg"
-            ),
+            image: AssetImage("assets/images/wallpaper.jpg"),
             fit: BoxFit.fitWidth
           )
         ),
         child: Column(
           children: <Widget>[ 
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const  Color.fromRGBO(212,235,244,1),
+                borderRadius: BorderRadius.circular(11),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 10
+                  )
+                ]
+              ),
+              child: const Text(
+                "Today",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
             Container(
               width: 300,
               margin: const EdgeInsets.only(bottom: 20, top: 10),
@@ -188,11 +220,20 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                   )
                 ]
               ),
-              child: const Text(
-                "When you send messages or make calls using end-to-end encryption, the content is secure and can only be accessed by the intended recipient, ensuring privacy and security.",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15),
-              ),
+              child: Stack(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 54, left: 5),
+                    child: const  Icon(Icons.lock, size: 15),
+                  ),
+                  const Expanded(
+                    child: Text(
+                    "Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them. Tap to learn more.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15),
+                  ),)
+                ],
+              )
             ),
             Container(
               padding: const EdgeInsets.only(left: 10),
@@ -219,10 +260,10 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                   )
                 ),
               )        
-            ),      
+            ),               
             Flexible(
               child: ListView.builder(
-                padding: const EdgeInsets.only(top: 5, bottom: 0,left: 5, right:  0),
+                padding: const EdgeInsets.only(left: 5, bottom: 300),
                 reverse: true,
                 itemBuilder: (_, int index) => _messages[index],
                 itemCount: _messages.length,
@@ -234,101 +275,6 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
           ],
         )
       )
-    );
-  }
-}
-
-
-class ChatMessage extends StatelessWidget {
-
-  const ChatMessage({
-    super.key,
-    required this.text,
-    required this.animationController,
-    required this.name,
-    required this.imageUrl,
-    required this.timeNow
-  });
-
-  final String text;
-  final AnimationController animationController;
-  final String name; 
-  final String imageUrl;
-  final String timeNow;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return SizeTransition(
-      sizeFactor: CurvedAnimation(
-        parent: animationController,  
-        curve: Curves.easeOut
-      ),
-      child: Container(
-        alignment: Alignment.centerRight,
-        margin: const EdgeInsets.only(top: 10, bottom: 0, left: 40, right:  10),
-        child: ClipPath(
-          clipper: UpperNipMessageClipperTwo(MessageType.send),
-          child: Container(
-            padding: const EdgeInsets.only(top: 10, bottom: 10,left: 10, right:  20),
-            decoration: const BoxDecoration(
-              color: Color(0XFFE4FDCA),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                    child: Text(text,
-                    style: const TextStyle(fontSize: 17),
-                  ),
-                ),
-                Container( 
-                  padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
-                  child: Row(
-                    children: [
-                      Text(timeNow,
-                        style: const TextStyle(fontSize: 10.0)
-                      ),
-                      const SizedBox(width: 5),
-                      const Icon(
-                        Icons.done_all,
-                        size: 15,
-                        color: Colors.blue,
-                      ),
-                    ],
-                  )
-                )
-              ],
-            )
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Avatar extends StatelessWidget {
-  final String imageUrl;
-  const Avatar({super.key, required this.imageUrl});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          var router = MaterialPageRoute(
-          builder: (context) => const MyApp()); 
-          Navigator.of(context).push(router);
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-              const Icon(Icons.arrow_back),
-              CircleAvatar(
-                radius: 16,
-                backgroundImage: NetworkImage(imageUrl),
-              ),
-          ], 
-        ),
     );
   }
 }

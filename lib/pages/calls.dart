@@ -15,10 +15,10 @@ class Calls extends StatelessWidget {
               leading: Container(
               padding: const EdgeInsets.all(1.5),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(26),
-                child: Image.network(calls[i].imgUrl,
-                  height: 45,
-                  width: 45,
+                borderRadius: BorderRadius.circular(40),
+                child: Image.asset(calls[i].imgUrl,
+                  height: 50,
+                  width: 50,
                   fit: BoxFit.cover,
                 ),
               ),
