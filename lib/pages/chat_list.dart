@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
 import 'package:whatsapp_clone/pages/chat_screen.dart';
-import 'package:whatsapp_clone/pages/contacts.dart'; 
+import 'package:whatsapp_clone/widgets/contacts.dart'; 
 
 class ChatList extends StatefulWidget {
   const ChatList({super.key});

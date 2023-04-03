@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/main.dart';
 import 'package:whatsapp_clone/pages/chat_screen.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
+import 'package:whatsapp_clone/pages/status.dart';
 
 class Images extends StatefulWidget {
   const Images({
@@ -115,31 +117,40 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                     ));
                     Navigator.of(context).push(router);
                   }),
-                  child: Stack(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child:  Text(status[index].name,
-                            style: const TextStyle(color: Colors.grey, 
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18
-                            ),  
-                          )
-                        
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 20),
-                        child:  Text(status[index].time,
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 13.0
-                            ),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.53,
+                    alignment: Alignment.centerLeft,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          child: Container(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child:  Text(status[index].name,
+                                style: const TextStyle(color: Colors.grey, 
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18
+                                ),  
+                              )
+                            
                           ),
-                        
-                      )
-                    ],
+                        ),
+                        Positioned(
+                          child: Container(
+                            padding: const EdgeInsets.only(top: 20),
+                            child:  Text(status[index].time,
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 13.0
+                                ),
+                              ),
+                            
+                          ),
+                        ),
+                      ],
+                    ),
                   )
-                ),
+                ),                
+                const Icon(Icons.more_vert, size: 30, color: Colors.white)
               ],
             ),    
             SafeArea(
@@ -156,13 +167,30 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                     }
                   });
                 },
+                onHorizontalDragUpdate: (DragUpdateDetails details) {
+                  if (details.delta.dx > 0 && index > 0) {
+                    setState(() {
+                      index--;
+                    });
+                    var router = MaterialPageRoute(
+                    builder: (context) => Images(index: index));
+                    Navigator.pushReplacement(context, router);
+                  } else if (details.delta.dx < 0 && index < 4) {
+                    setState(() {
+                      index++;
+                    });
+                    var router = MaterialPageRoute(
+                    builder: (context) => Images(index: index));
+                    Navigator.pushReplacement(context, router);
+                  }
+                },
                 child: Image.asset(status[index].imgUrl,
                   fit: BoxFit.contain,
                   scale: 1,
                   height: 600,
                 ),
               )
-            ), 
+            ),
           ],
         ),
         backgroundColor: Colors.black,

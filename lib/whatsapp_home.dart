@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/calls.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
-import 'package:whatsapp_clone/pages/contacts.dart'; 
+import 'package:whatsapp_clone/widgets/contacts.dart'; 
 import 'package:whatsapp_clone/pages/chat_list.dart';
 import 'package:whatsapp_clone/pages/status.dart';
 

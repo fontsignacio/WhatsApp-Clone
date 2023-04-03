@@ -162,17 +162,21 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
         leading: Avatar(imageUrl: widget.imageUrl),
         title: Stack(
           children: [
-            Container(
-              padding: const EdgeInsets.only(bottom: 10),
-                child: Text(widget.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold
+            Positioned(
+              child: Container(
+                padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(widget.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold
+                  )
                 )
-              )
+              ),
             ),
-            Container(
-              padding: const EdgeInsets.only(top: 25),
-              child: const  Text("online",
-              style: TextStyle(color: Colors.white, fontSize: 15.0))
+            Positioned(
+              child: Container(
+                padding: const EdgeInsets.only(top: 25),
+                child: const  Text("online",
+                style: TextStyle(color: Colors.white, fontSize: 15.0))
+              ),
             )     
           ],
         ),
