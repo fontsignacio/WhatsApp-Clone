@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/main.dart';
 import 'package:whatsapp_clone/pages/chat_screen.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
 import 'package:whatsapp_clone/pages/status.dart';
@@ -23,7 +22,6 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
 
   @override
   void initState() {
-
     index = widget.index;
 
     controller = AnimationController(
@@ -50,6 +48,39 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
     controller.forward();
     super.initState();
   }
+
+  void _startHold() {
+    setState(() {
+      if (determinate == false) {
+        controller.stop();
+        determinate = true;
+      }
+    });
+  }
+
+  void _endHold() {
+    setState(() {
+      if (determinate != false) {
+          determinate = false;
+          controller
+            .forward(from: controller.value);
+      }
+    });
+  }
+
+  void _tap(){
+    setState(() {
+      if (index >= 0 && index < 4) {
+        setState(() {
+          index++;
+        });
+        var router = MaterialPageRoute(
+        builder: (context) => Images(index: index));
+        Navigator.pushReplacement(context, router);
+      }
+    });
+  }
+
 
   @override
   void dispose() {
@@ -150,23 +181,14 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                     ),
                   )
                 ),                
-                const Icon(Icons.more_vert, size: 30, color: Colors.white)
+                const Icon(Icons.more_vert, size: 25, color: Colors.white)
               ],
             ),    
             SafeArea(
               child: GestureDetector(
-                onTap: () {     
-                  setState(() {
-                    if (determinate == false) {
-                        controller.stop();
-                        determinate = true;
-                      } else {
-                        determinate = false;
-                        controller
-                          .forward(from: controller.value);
-                    }
-                  });
-                },
+                onLongPress: _startHold,
+                onLongPressUp: _endHold,
+                onTap: _tap,
                 onHorizontalDragUpdate: (DragUpdateDetails details) {
                   if (details.delta.dx > 0 && index > 0) {
                     setState(() {

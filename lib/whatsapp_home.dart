@@ -35,40 +35,37 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
               padding: EdgeInsets.only(right: 5),
               child: Icon(Icons.search),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 0),
-              child: PopupMenuButton <MenuItem> (
-                onSelected: (value) => {
-                  if(value == MenuItem.item1){
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const Contacts(),
-                    )),
-                  }
-                },
-                itemBuilder: (context) => const [
-                  PopupMenuItem(
-                    value: MenuItem.item1,
-                    child: Text("New group"),
-                  ),
-                  PopupMenuItem(
-                    value: MenuItem.item2,
-                    child: Text("New broadcast"),
-                  ),
-                  PopupMenuItem(
-                    value: MenuItem.item3,
-                    child: Text("Linked devices"),
-                  ),
-                  PopupMenuItem(
-                    value: MenuItem.item4,
-                    child: Text("Starred messages"),
-                  ),
-                  PopupMenuItem(
-                    value: MenuItem.item5,
-                    child: Text("Settings"),
-                  ) 
-                ]  
-              )
-            )
+            PopupMenuButton <MenuItem> (
+              onSelected: (value) => {
+                if(value == MenuItem.item1){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const Contacts(),
+                  )),
+                }
+              },
+              itemBuilder: (context) => const [
+                PopupMenuItem(
+                  value: MenuItem.item1,
+                  child: Text("New group", style: TextStyle(fontSize: 13)),
+                ),
+                PopupMenuItem(
+                  value: MenuItem.item2,
+                  child: Text("New broadcast", style: TextStyle(fontSize: 13),),
+                ),
+                PopupMenuItem(
+                  value: MenuItem.item3,
+                  child: Text("Linked devices", style: TextStyle(fontSize: 13),),
+                ),
+                PopupMenuItem(
+                  value: MenuItem.item4,
+                  child: Text("Starred messages", style: TextStyle(fontSize: 13),),
+                ),
+                PopupMenuItem(
+                  value: MenuItem.item5,
+                  child: Text("Settings", style: TextStyle(fontSize: 13),),
+                ) 
+              ]  
+            )            
           ],
           
           bottom: TabBar(
