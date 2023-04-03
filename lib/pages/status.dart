@@ -108,12 +108,7 @@ class _StatusState extends State<Status> {
 
             onTap: () {
               var router = MaterialPageRoute(
-              builder: (context) => Images(name: status[i].name,
-                  imgUrl: status[i].imgUrl,
-                  time: status[i].time,
-                  index: i
-                )
-              );
+              builder: (context) => Images(index: i));
               Navigator.of(context).push(router);
             }
           
@@ -157,12 +152,7 @@ class _StatusState extends State<Status> {
             ),
             onTap: () {
               var router = MaterialPageRoute(
-              builder: (context) => Images(name: status[i].name,
-                imgUrl: status[i].imgUrl,
-                time: status[i].time,
-                index: i,
-              )
-            );
+              builder: (context) => Images(index: i));
               Navigator.of(context).push(router);
             }
           )

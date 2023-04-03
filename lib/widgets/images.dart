@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/chat_screen.dart';
+import 'package:whatsapp_clone/models/status_model.dart';
 
 class Images extends StatefulWidget {
   const Images({
     super.key,
-    required this.name,
-    required this.imgUrl,
-    required this.time,
     required this.index
   });
-  final String imgUrl;
-  final String name;
-  final String time;
   final int index;
 
 
@@ -22,9 +17,13 @@ class Images extends StatefulWidget {
 class _ImagesState extends State<Images> with TickerProviderStateMixin {
   late AnimationController controller;
   bool determinate = false;
+  late int index;
 
   @override
   void initState() {
+
+    index = widget.index;
+
     controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 5),
@@ -33,11 +32,19 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
         
       });
     });
+
     controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Navigator.of(context).pop();
-      }
+        if(index == 4){
+          Navigator.of(context).pop();
+        }else{
+          index++;
+          controller.reset(); 
+          controller.forward();
+        }
+      }     
     });
+
     controller.forward();
     super.initState();
   }
@@ -75,7 +82,11 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                   ),
                   onPressed: (() {
                     var router = MaterialPageRoute(
-                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl, index: widget.index, ));
+                    builder: (context) => ChatScreen(
+                      name: status[index].name,
+                      imageUrl: status[index].imgUrl,
+                      index: index
+                    ));
                     Navigator.of(context).push(router);
                   }),
                   child: CircleAvatar(
@@ -83,7 +94,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                     radius: 21,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(26),
-                      child: Image.asset(widget.imgUrl,
+                      child: Image.asset(status[index].imgUrl,
                         height: 40,
                         width: 40,
                         fit: BoxFit.cover,
@@ -97,14 +108,18 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                   ),
                   onPressed: (() {
                     var router = MaterialPageRoute(
-                    builder: (context) => ChatScreen(name: widget.name, imageUrl: widget.imgUrl, index: widget.index,));
+                    builder: (context) => ChatScreen(
+                      name: status[index].name,
+                      imageUrl: status[index].imgUrl,
+                      index: index
+                    ));
                     Navigator.of(context).push(router);
                   }),
                   child: Stack(
                     children: [
                       Container(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child:  Text(widget.name,
+                        child:  Text(status[index].name,
                             style: const TextStyle(color: Colors.grey, 
                               fontWeight: FontWeight.bold,
                               fontSize: 18
@@ -114,7 +129,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                       ),
                       Container(
                         padding: const EdgeInsets.only(top: 20),
-                        child:  Text(widget.time,
+                        child:  Text(status[index].time,
                             style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 13.0
@@ -141,7 +156,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                     }
                   });
                 },
-                child: Image.asset(widget.imgUrl,
+                child: Image.asset(status[index].imgUrl,
                   fit: BoxFit.contain,
                   scale: 1,
                   height: 600,
