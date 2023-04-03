@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/calls.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
+import 'package:whatsapp_clone/widgets/broadcast.dart';
 import 'package:whatsapp_clone/widgets/contacts.dart'; 
 import 'package:whatsapp_clone/pages/chat_list.dart';
 import 'package:whatsapp_clone/pages/status.dart';
+import 'package:whatsapp_clone/widgets/group.dart';
+import 'package:whatsapp_clone/widgets/settings.dart';
 
 enum MenuItem {item1,item2,item3,item4,item5}
 
@@ -39,7 +42,17 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
               onSelected: (value) => {
                 if(value == MenuItem.item1){
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const Contacts(),
+                    builder: (context) => const Group(),
+                  )),
+                },
+                if(value == MenuItem.item2){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const Broadcast(),
+                  )),
+                },
+                if(value == MenuItem.item5){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const Settings(),
                   )),
                 }
               },

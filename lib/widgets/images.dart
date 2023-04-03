@@ -180,7 +180,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                       ],
                     ),
                   )
-                ),                
+                ),
                 const Icon(Icons.more_vert, size: 25, color: Colors.white)
               ],
             ),    
