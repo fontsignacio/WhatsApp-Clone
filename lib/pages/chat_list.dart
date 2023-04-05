@@ -45,9 +45,11 @@ class _ChatListState extends State<ChatList> {
                 child: Row(
                   children: [
                     messageData[i].send,
-                    Text(messageData[i].newMessage,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+                    Expanded(
+                      child: Text(messageData[i].newMessage,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: Colors.grey, fontSize: 15.0),
+                      ),
                     ),
                   ],
                 ),
@@ -69,7 +71,7 @@ class _ChatListState extends State<ChatList> {
       ),
       
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.message, color: Colors.white,),
         onPressed: (){
           var router = MaterialPageRoute(

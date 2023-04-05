@@ -2,10 +2,12 @@ import 'package:whatsapp_clone/models/chat_model.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/widgets/profile.dart';
 import '../widgets/message.dart';
 import 'package:intl/intl.dart';
 import '../widgets/avatar.dart';
 
+enum MenuItem {item1,item2,item3,item4,item5,item6,item7}
 
 class ChatScreen extends StatefulWidget {
   final String name;
@@ -160,39 +162,87 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         leading: Avatar(imageUrl: widget.imageUrl),
-        title: Stack(
-          children: [
-            Positioned(
-              child: Container(
-                padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(widget.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold
+        title: GestureDetector(
+          onTap: (){
+            var router = MaterialPageRoute(
+            builder: (context) => Profile(index: widget.index,)); 
+            Navigator.of(context).push(router);
+          },
+          child: Stack(
+            children: [
+              Positioned(
+                child: Container(
+                  padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(widget.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold
+                    )
                   )
-                )
+                ),
               ),
-            ),
-            Positioned(
-              child: Container(
-                padding: const EdgeInsets.only(top: 25),
-                child: const  Text("online",
-                style: TextStyle(color: Colors.white, fontSize: 15.0))
-              ),
-            )     
-          ],
+              Positioned(
+                child: Container(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: const  Text("online",
+                  style: TextStyle(color: Colors.white, fontSize: 13.0))
+                ),
+              )     
+            ],
+          ),
         ),
-        actions: const [
-            Padding(
+        actions: [
+            const Padding(
               padding: EdgeInsets.only(right: 20),
               child: Icon(Icons.videocam_rounded),
             ),
-            Padding(
-              padding: EdgeInsets.only(right: 15),
+            const Padding(
+              padding: EdgeInsets.only(right: 5),
               child: Icon(Icons.call),
             ),
-            Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: Icon(Icons.more_vert),
-            ),
+            PopupMenuButton <MenuItem> (
+              onSelected: (value) => {
+                if(value == MenuItem.item1){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Profile(index: widget.index),
+                  )),
+                },
+              },
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: MenuItem.item1,
+                  child: Text("View contact", style: TextStyle(fontSize: 13)),
+                ),
+                const PopupMenuItem(
+                  value: MenuItem.item2,
+                  child: Text("Media, links, and docs", style: TextStyle(fontSize: 13),),
+                ),
+                const PopupMenuItem(
+                  value: MenuItem.item3,
+                  child: Text("Search", style: TextStyle(fontSize: 13),),
+                ),
+                const PopupMenuItem(
+                  value: MenuItem.item4,
+                  child: Text("Mute notifications", style: TextStyle(fontSize: 13),),
+                ),
+                const PopupMenuItem(
+                  value: MenuItem.item5,
+                  child: Text("Disappearing messages", style: TextStyle(fontSize: 13),),
+                ),
+                const PopupMenuItem(
+                  value: MenuItem.item6,
+                  child: Text("Wallpaper", style: TextStyle(fontSize: 13),),
+                ),
+                PopupMenuItem(
+                  value: MenuItem.item7,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text("More", style: TextStyle(fontSize: 13),),
+                      Icon(Icons.arrow_right, color: Colors.black,)
+                    ],
+                  ),
+                ), 
+              ]  
+            )            
         ],
       ),
       body: Container(

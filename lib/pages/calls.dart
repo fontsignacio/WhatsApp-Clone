@@ -50,7 +50,7 @@ class Calls extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add_call, color: Colors.white,),
         onPressed: (){}
       )

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
-import '../widgets/images.dart';
+import '../widgets/images_status.dart';
 
 class Status extends StatefulWidget {
   const Status({super.key});
@@ -27,24 +27,24 @@ class _StatusState extends State<Status> {
         children: <Widget>[ 
           ListTile(
             leading: CircleAvatar(
-              radius: 25,
+              radius: 23,
               child: CircleAvatar(
                 backgroundImage: myimage,
-                radius: 25,
+                radius: 23,
                 child: Container(
-                  padding: const EdgeInsets.only(left: 26,top: 25),
-                  width: 50, 
-                  height: 50,
+                  padding: const EdgeInsets.only(left: 25,top: 25),
+                  width: 60, 
+                  height: 60,
                   child: Container(
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(60 / 2),                      
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(50 / 2),
                     ),
                     child: const Center(
                       child: Icon(
                         Icons.add_circle,
-                        color: Color.fromARGB(255, 37, 211, 102),
-                        size: 24
+                        color: Color.fromARGB(255, 0, 128,106),
+                        size: 22
                       ),
                     )
                   ),
@@ -80,7 +80,7 @@ class _StatusState extends State<Status> {
               padding: const EdgeInsets.all(1.5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                border: Border.all(color: const Color.fromARGB(255, 37, 211, 102), width: 3),
+                border: Border.all(color: const Color.fromARGB(255, 0,230,118), width: 2),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
@@ -126,7 +126,7 @@ class _StatusState extends State<Status> {
               padding: const EdgeInsets.all(1.5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                border: Border.all(color: Colors.grey, width: 3),
+                border: Border.all(color: Colors.grey, width: 2),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
@@ -160,7 +160,7 @@ class _StatusState extends State<Status> {
       ),
           
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.camera_alt_rounded, color: Colors.white,),
         onPressed: (){
           var router = MaterialPageRoute(

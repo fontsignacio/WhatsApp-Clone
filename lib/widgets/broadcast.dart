@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/contact_model.dart';
-import 'package:whatsapp_clone/pages/chat_screen.dart'; 
 
 class Broadcast extends StatelessWidget {
   const Broadcast({super.key});

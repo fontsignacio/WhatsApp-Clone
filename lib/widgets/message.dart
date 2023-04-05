@@ -28,7 +28,7 @@ class ChatMessage extends StatelessWidget {
       ),
       child: Container(
         alignment: Alignment.centerRight,
-        margin: const EdgeInsets.only(top: 10, left: 40, right:  10),
+        margin: const EdgeInsets.only(top: 5, left: 40, right:  10),
         child: ClipPath(
           clipper: UpperNipMessageClipperTwo(MessageType.send),
           child: Container(

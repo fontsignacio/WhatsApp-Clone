@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/calls.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
 import 'package:whatsapp_clone/widgets/broadcast.dart';
-import 'package:whatsapp_clone/widgets/contacts.dart'; 
 import 'package:whatsapp_clone/pages/chat_list.dart';
 import 'package:whatsapp_clone/pages/status.dart';
 import 'package:whatsapp_clone/widgets/group.dart';
@@ -29,6 +28,9 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
   
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double yourWidth = width  / 5;
+
     return Scaffold(
       appBar: AppBar(
           title: const Text("WhatsApp"),
@@ -82,12 +84,33 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
           ],
           
           bottom: TabBar(
+            indicatorSize: TabBarIndicatorSize.label,
             indicatorColor: Colors.white,
-            tabs: const <Widget>[
-              Tab(icon: Icon(Icons.camera_alt_rounded)),
-              Tab(text: "CHAT"),
-              Tab(text: "STATUS"),
-              Tab(text: "CALLS"),
+            isScrollable: true,
+            tabs: <Widget>[
+              Container(
+                width: 30,
+                height: 50,
+                alignment: Alignment.center,
+                child: const Icon(
+                  Icons.camera_alt_rounded,
+                ),
+              ),
+              Container(
+                width: yourWidth,
+                  height: 50,
+                  alignment: Alignment.center,
+                  child: const Text("CHATS")),
+              Container(
+                  width: yourWidth,
+                  height: 50,
+                  alignment: Alignment.center,
+                  child: const  Text("STATUS")),
+              Container(
+                  width: yourWidth,
+                  height: 50,
+                  alignment: Alignment.center,
+                  child: const Text("CALL"))
             ],
           controller: controller,
         )

@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
       title: "WhatsApp",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color.fromARGB(255, 7, 94, 84),
-          secondary: const Color.fromARGB(255, 37, 211, 102)
+          primary: const Color.fromARGB(255, 0, 128, 106),
+          secondary: const Color.fromARGB(255, 0,230,118)
         ),      
       ),
       debugShowCheckedModeBanner: false,

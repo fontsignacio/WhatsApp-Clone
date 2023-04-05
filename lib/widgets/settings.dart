@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
-import '../models/contact_model.dart';
+
+enum MenuItem {item1,item2,item3,item4,item5}
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -52,7 +53,7 @@ class Settings extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
+              ), 
               const Icon(Icons.qr_code, size: 35, color: Colors.grey)
             ],
           ),
@@ -76,9 +77,10 @@ class Settings extends StatelessWidget {
                   subtitle: const Text("Privacy, security, change number",
                     style: TextStyle(fontSize: 12.0)
                   ),
+                  onTap: () {},
                 ),
-                const ListTile(
-                  leading: Padding(
+                ListTile(
+                  leading: const Padding(
                     padding: EdgeInsets.all(6),
                     child: Icon(
                       Icons.chat,
@@ -86,13 +88,14 @@ class Settings extends StatelessWidget {
                       color: Colors.grey
                     ),
                   ),
-                  title:Text("Chats",style: TextStyle(fontSize: 17.0)),
-                  subtitle: Text("Theme, wallpapers, chat history",
+                  title: const Text("Chats",style: TextStyle(fontSize: 17.0)),
+                  subtitle:const  Text("Theme, wallpapers, chat history",
                     style: TextStyle(fontSize: 12.0)
                   ),
+                  onTap: () {},
                 ),
-                const ListTile(
-                  leading: Padding(
+                ListTile(
+                  leading:const  Padding(
                     padding: EdgeInsets.all(6),
                     child: Icon(
                       Icons.notifications,
@@ -100,13 +103,14 @@ class Settings extends StatelessWidget {
                       color: Colors.grey
                     ),
                   ),
-                  title:Text("Notifications",style: TextStyle(fontSize: 17.0)),
-                  subtitle: Text("Message, group & call tones",
+                  title: const Text("Notifications",style: TextStyle(fontSize: 17.0)),
+                  subtitle: const Text("Message, group & call tones",
                     style: TextStyle(fontSize: 12.0)
                   ),
+                  onTap: () {},
                 ),
-                const ListTile(
-                  leading: Padding(
+                ListTile(
+                  leading: const Padding(
                     padding: EdgeInsets.all(6),
                     child: Icon(
                       Icons.data_saver_off,
@@ -114,13 +118,14 @@ class Settings extends StatelessWidget {
                       color: Colors.grey
                     ),
                   ),
-                  title:Text("Storage and Data",style: TextStyle(fontSize: 17.0)),
-                  subtitle: Text("Network usage, auto-download",
+                  title: const Text("Storage and Data",style: TextStyle(fontSize: 17.0)),
+                  subtitle: const Text("Network usage, auto-download",
                     style: TextStyle(fontSize: 12.0)
                   ),
+                  onTap: () {},
                 ),
-                const ListTile(
-                  leading: Padding(
+                ListTile(
+                  leading: const Padding(
                     padding: EdgeInsets.all(6),
                     child: Icon(
                       Icons.help_outline,
@@ -128,13 +133,14 @@ class Settings extends StatelessWidget {
                       color: Colors.grey
                     ),
                   ),
-                  title:Text("Help",style: TextStyle(fontSize: 17.0)),
-                  subtitle: Text("Help center, contact us, privacy policy",
+                  title: const Text("Help",style: TextStyle(fontSize: 17.0)),
+                  subtitle: const Text("Help center, contact us, privacy policy",
                     style: TextStyle(fontSize: 12.0)
                   ),
+                  onTap: () {},
                 ),
-                const ListTile(
-                  leading: Padding(
+                ListTile(
+                  leading: const Padding(
                     padding: EdgeInsets.all(6),
                     child: Icon(
                       Icons.group,
@@ -142,7 +148,8 @@ class Settings extends StatelessWidget {
                       color: Colors.grey
                     ),
                   ),
-                  title:Text("Invite a Friend",style: TextStyle(fontSize: 17.0)),
+                  title: const Text("Invite a Friend",style: TextStyle(fontSize: 17.0)),
+                  onTap: () {},
                 ),
               ],
             ),

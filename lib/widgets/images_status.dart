@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/chat_screen.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
-import 'package:whatsapp_clone/pages/status.dart';
 
 class Images extends StatefulWidget {
   const Images({
@@ -149,7 +148,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                     Navigator.of(context).push(router);
                   }),
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.53,
+                    width: MediaQuery.of(context).size.width * 0.50,
                     alignment: Alignment.centerLeft,
                     child: Stack(
                       children: [
@@ -181,7 +180,32 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
                     ),
                   )
                 ),
-                const Icon(Icons.more_vert, size: 25, color: Colors.white)
+                PopupMenuButton <MenuItem> (
+                  color: Colors.white,
+                  onSelected: (value) => {},
+                  itemBuilder: (context) => [
+                    const PopupMenuItem(
+                      value: MenuItem.item1,
+                      child: Text("Mute           ", style: TextStyle(fontSize: 13)),
+                    ),
+                    const PopupMenuItem(
+                      value: MenuItem.item2,
+                      child: Text("Message           ", style: TextStyle(fontSize: 13),),
+                    ),
+                    const PopupMenuItem(
+                      value: MenuItem.item3,
+                      child: Text("Voice call           ", style: TextStyle(fontSize: 13),),
+                    ),
+                    const PopupMenuItem(
+                      value: MenuItem.item4,
+                      child: Text("Video call           ", style: TextStyle(fontSize: 13),),
+                    ),
+                    const PopupMenuItem(
+                      value: MenuItem.item5,
+                      child: Text("View contact           ", style: TextStyle(fontSize: 13),),
+                    ),
+                  ]
+                ) 
               ],
             ),    
             SafeArea(
