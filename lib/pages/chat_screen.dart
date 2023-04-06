@@ -2,7 +2,7 @@ import 'package:whatsapp_clone/models/chat_model.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/widgets/profile.dart';
+import 'package:whatsapp_clone/pages/profile.dart';
 import '../widgets/message.dart';
 import 'package:intl/intl.dart';
 import '../widgets/avatar.dart';

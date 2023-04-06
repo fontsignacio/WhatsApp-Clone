@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/calls.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
-import 'package:whatsapp_clone/widgets/broadcast.dart';
+import 'package:whatsapp_clone/pages/broadcast.dart';
 import 'package:whatsapp_clone/pages/chat_list.dart';
 import 'package:whatsapp_clone/pages/status.dart';
-import 'package:whatsapp_clone/widgets/group.dart';
-import 'package:whatsapp_clone/widgets/settings.dart';
+import 'package:whatsapp_clone/pages/group.dart';
+import 'package:whatsapp_clone/pages/settings.dart';
+import 'package:whatsapp_clone/widgets/search_chats.dart';
 
 enum MenuItem {item1,item2,item3,item4,item5}
 
@@ -36,10 +37,14 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
           title: const Text("WhatsApp"),
 
           actions: [
-            const Padding(
-              padding: EdgeInsets.only(right: 5),
-              child: Icon(Icons.search),
-            ),
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SearchChats(),
+                ));
+              } 
+            ),         
             PopupMenuButton <MenuItem> (
               onSelected: (value) => {
                 if(value == MenuItem.item1){

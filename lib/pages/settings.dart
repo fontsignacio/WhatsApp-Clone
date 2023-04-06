@@ -54,7 +54,11 @@ class Settings extends StatelessWidget {
                   ),
                 ],
               ), 
-              const Icon(Icons.qr_code, size: 35, color: Colors.grey)
+              const Icon(
+                Icons.qr_code,
+                size: 35,
+                color:  Color.fromARGB(255, 0, 128, 106)
+              )
             ],
           ),
           const Divider(),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import '../models/contact_model.dart';
 import '../widgets/image_profile.dart';
 import 'dart:math';
@@ -104,9 +103,9 @@ class _ProfileState extends State<Profile> {
                         title: Text('Media visibility'),
                       );
                     case 4: return  const SizedBox(height: 15);
-                    case 5: return  Container(
+                    case 5: return  const SizedBox(
                       height: 80,
-                      child: const ListTile(
+                      child: ListTile(
                           tileColor: Colors.white,
                           leading: Icon(Icons.lock),
                           title: Padding(
