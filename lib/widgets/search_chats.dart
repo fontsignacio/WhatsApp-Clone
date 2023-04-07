@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/chat_screen.dart';
 import '../models/chat_model.dart';
 
-class SearchContact extends StatefulWidget {
-  const SearchContact({super.key});
+class SearchChats extends StatefulWidget {
+  const SearchChats({super.key});
 
   @override
-  State<SearchContact> createState() => _SearchContactState();
+  State<SearchChats> createState() => _SearchContactState();
 }
 
-class _SearchContactState extends State<SearchContact> {
+class _SearchContactState extends State<SearchChats> {
   TextEditingController searchController = TextEditingController();
   List<ChatModel> data = messageData;
 

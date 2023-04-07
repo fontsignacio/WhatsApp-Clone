@@ -3,9 +3,12 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/profile.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:flutter/foundation.dart' as foundation;
 import '../widgets/message.dart';
 import 'package:intl/intl.dart';
 import '../widgets/avatar.dart';
+
 
 enum MenuItem {item1,item2,item3,item4,item5,item6,item7}
 
@@ -31,6 +34,8 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   Widget iconAudio = const Icon(Icons.mic,color: Colors.white,size: 30);
   Widget icon = const Icon(Icons.mic,color: Colors.white,size: 30);
   bool _isTyped = false;
+  bool showEmojiPicker = false;
+  FocusNode focusNode = FocusNode();
 
   void _handledSubmit(String text){
     _textController.clear();
@@ -63,7 +68,15 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     });
     
     message.animationController.forward();
+
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        showEmojiPicker = false;
+      }
+    });
+
   }
+
 
   Widget _buildTextComposer(){
     return IconTheme(
@@ -78,6 +91,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 data: Theme.of(context).copyWith(primaryColor: Colors.white),
                 child: SingleChildScrollView(
                   child: TextField(
+                    focusNode: focusNode,
                     keyboardType: TextInputType.multiline,
                     minLines: 1,
                     maxLines: 2,
@@ -92,11 +106,20 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                         }
                       });
                     },
+                    onTap: () {
+                      if (showEmojiPicker) setState(() => showEmojiPicker = !showEmojiPicker);
+                    },
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(
-                        Icons.insert_emoticon,
-                        size: 30,
-                        color: Colors.grey
+                      prefixIcon: IconButton(
+                        icon: showEmojiPicker ? const Icon(Icons.keyboard,size: 30,color: Colors.grey) :
+                        const Icon(Icons.emoji_emotions,size: 30,color: Colors.grey),
+                        onPressed: () {
+                          setState(() {
+                            showEmojiPicker = !showEmojiPicker;
+                            focusNode.unfocus();
+                            focusNode.canRequestFocus = true;
+                          });
+                        },
                       ),
                       hintText: "Message",
                       border: const OutlineInputBorder(
@@ -114,7 +137,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                               color: Colors.grey
                             ),
                           ),
-                          IconButton(                
+                          if (!_isTyped) IconButton(                
                             icon: const Icon(
                               Icons.camera_alt_rounded,
                               size: 30,
@@ -245,102 +268,173 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             )            
         ],
       ),
-      body: Container(
-        decoration: const  BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/wallpaper.jpg"),
-            fit: BoxFit.fitWidth
-          )
-        ),
-        child: Column(
-          children: <Widget>[ 
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: const  Color.fromRGBO(212,235,244,1),
-                borderRadius: BorderRadius.circular(11),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    blurRadius: 10
-                  )
-                ]
+      body: WillPopScope(
+        child: Container(
+          decoration: const  BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/wallpaper.jpg"),
+              fit: BoxFit.fitWidth
+            )
+          ),
+          child: Column(
+            children: <Widget>[ 
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const  Color.fromRGBO(212,235,244,1),
+                  borderRadius: BorderRadius.circular(11),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 10
+                    )
+                  ]
+                ),
+                child: const Text(
+                  "Today",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 15),
+                ),
               ),
-              child: const Text(
-                "Today",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15),
+              Container(
+                width: 300,
+                margin: const EdgeInsets.only(bottom: 20, top: 10),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const  Color(0XFFFFF3C2),
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 8
+                    )
+                  ]
+                ),
+                child: Stack(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 54, left: 5),
+                      child: const  Icon(Icons.lock, size: 15),
+                    ),
+                    const Expanded(
+                      child: Text(
+                      "Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them. Tap to learn more.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 15),
+                    ),)
+                  ],
+                )
               ),
-            ),
-            Container(
-              width: 300,
-              margin: const EdgeInsets.only(bottom: 20, top: 10),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: const  Color(0XFFFFF3C2),
-                borderRadius: BorderRadius.circular(5),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    blurRadius: 8
-                  )
-                ]
-              ),
-              child: Stack(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(bottom: 54, left: 5),
-                    child: const  Icon(Icons.lock, size: 15),
+              Container(
+                padding: const EdgeInsets.only(left: 10),
+                alignment: Alignment.centerLeft,
+                child: ClipPath(
+                  clipper: UpperNipMessageClipperTwo(MessageType.receive),
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 10, bottom: 10,left: 25, right:  10),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(messageData[widget.index].message,
+                          style: const TextStyle(fontSize: 17),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(left: 10, top: 10),
+                          child: Text(messageData[widget.index].time,
+                          style: const TextStyle(fontSize: 10.0))
+                        )
+                      ],
+                    )
                   ),
-                  const Expanded(
-                    child: Text(
-                    "Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them. Tap to learn more.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15),
-                  ),)
-                ],
-              )
-            ),
-            Container(
-              padding: const EdgeInsets.only(left: 10),
-              alignment: Alignment.centerLeft,
-              child: ClipPath(
-                clipper: UpperNipMessageClipperTwo(MessageType.receive),
-                child: Container(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10,left: 25, right:  10),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(messageData[widget.index].message,
-                        style: const TextStyle(fontSize: 17),
+                )        
+              ),               
+              Flexible(
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(left: 5, bottom: 270),
+                  reverse: true,
+                  itemBuilder: (_, int index) => _messages[index],
+                  itemCount: _messages.length,
+                ),
+              ),
+              Container(
+                child: _buildTextComposer(),
+              ),
+              Offstage(
+                offstage: !showEmojiPicker,
+                child: SizedBox(
+                  height: 292,
+                  child: EmojiPicker(    
+                    textEditingController: _textController,
+                    onEmojiSelected: (category, emoji) {
+                      setState(() {
+                        _isTyped = emoji.emoji.isNotEmpty;
+                        if(_isTyped){
+                          icon = iconsText;
+                        }else {
+                          icon = iconAudio;
+                        }
+                      });
+                    },
+                    onBackspacePressed: () {
+                      setState(() {
+                        _isTyped =_textController.text.isNotEmpty;
+                        if(_isTyped){
+                          icon = iconsText;
+                        }else {
+                          icon = iconAudio;                  
+                        }
+                      });
+                    },  
+                    config: Config(
+                      columns: 7, 
+                      emojiSizeMax: 32 *
+                          (foundation.defaultTargetPlatform ==
+                            TargetPlatform.iOS
+                              ? 1.30
+                              : 1.0),
+                      verticalSpacing: 0,
+                      horizontalSpacing: 0,
+                      gridPadding: EdgeInsets.zero,
+                      initCategory: Category.RECENT,
+                      bgColor: const Color(0xFFF2F2F2),
+                      indicatorColor: Colors.blue,
+                      iconColor: Colors.grey,
+                      iconColorSelected: Colors.blue,
+                      backspaceColor: Colors.blue,
+                      skinToneDialogBgColor: Colors.white,
+                      skinToneIndicatorColor: Colors.grey,
+                      enableSkinTones: true,
+                      showRecentsTab: true,
+                      recentsLimit: 28,
+                      replaceEmojiOnLimitExceed: false,
+                      noRecents: const Text('No Recents',
+                        style: TextStyle(fontSize: 20, color: Colors.black26),
+                        textAlign: TextAlign.center,
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 10, top: 10),
-                        child: Text(messageData[widget.index].time,
-                        style: const TextStyle(fontSize: 10.0))
-                      )
-                    ],
+                      loadingIndicator: const SizedBox.shrink(),
+                      tabIndicatorAnimDuration: kTabScrollDuration,
+                      categoryIcons: const CategoryIcons(),
+                      buttonMode: ButtonMode.MATERIAL,
+                      checkPlatformCompatibility: true,
+                    ),
                   )
                 ),
-              )        
-            ),               
-            Flexible(
-              child: ListView.builder(
-                padding: const EdgeInsets.only(left: 5, bottom: 270),
-                reverse: true,
-                itemBuilder: (_, int index) => _messages[index],
-                itemCount: _messages.length,
               ),
-            ),
-            Container(
-              child: _buildTextComposer(),
-            )
-          ],
-        )
+            ],
+          )
+        ),
+        onWillPop: () {
+          if (showEmojiPicker) {
+            setState(() => showEmojiPicker = !showEmojiPicker);
+            return Future.value(false);
+          } else {
+            return Future.value(true);
+          }
+        },
       )
     );
   }

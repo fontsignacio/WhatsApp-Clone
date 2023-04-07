@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/contact_model.dart';
 import '../widgets/image_profile.dart';
+import 'package:whatsapp_clone/pages/chat_screen.dart';
 import 'dart:math';
 
 enum MenuItem {item1,item2,item3,item4}
@@ -147,9 +148,22 @@ class _ProfileState extends State<Profile> {
                           children: [
                             Transform.rotate(
                               angle: pi / 1,
-                              child: const Icon(
-                                Icons.message,
-                                color: Color.fromARGB(255,  0, 128, 106),
+                              child: IconButton(
+                                onPressed: () {
+                                  var router = MaterialPageRoute(
+                                    builder: ((context) => ChatScreen(
+                                        name: contact[widget.index].name,
+                                        imageUrl: contact[widget.index].imgUrl,
+                                        index: widget.index,
+                                      )
+                                    )
+                                  );
+                                  Navigator.of(context).push(router);
+                                },
+                                icon: const Icon(
+                                  Icons.message,
+                                  color: Color.fromARGB(255,  0, 128, 106),
+                                ),
                               ),
                             ),
                             const SizedBox(width: 20),
