@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/call_model.dart';
+import 'package:whatsapp_clone/pages/buttom/call_contact.dart';
 
 class Calls extends StatelessWidget {
   const Calls({super.key});
@@ -52,7 +53,11 @@ class Calls extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add_call, color: Colors.white,),
-        onPressed: (){}
+        onPressed: (){
+          var router = MaterialPageRoute(
+          builder: (context) => const CallContact());
+          Navigator.of(context).push(router);
+        }
       )
       
     );

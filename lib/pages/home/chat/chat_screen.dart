@@ -80,7 +80,6 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     });
   }
 
-
   Widget _buildTextComposer(){
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).colorScheme.secondary),  
