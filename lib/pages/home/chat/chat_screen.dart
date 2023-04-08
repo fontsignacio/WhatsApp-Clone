@@ -325,16 +325,17 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 ),
                 child: Stack(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.only(bottom: 54, left: 5),
-                      child: const  Icon(Icons.lock, size: 15),
+                    Positioned(
+                      child: Container(
+                        padding: const EdgeInsets.only(bottom: 54, left: 5),
+                        child: const  Icon(Icons.lock, size: 15),
+                      ),
                     ),
-                    const Expanded(
-                      child: Text(
-                      "Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them. Tap to learn more.",
+                    const Text(
+                      "      Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them. Tap to learn more.",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 15),
-                    ),)
+                    )
                   ],
                 )
               ),
