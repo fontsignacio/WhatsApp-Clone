@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/contact_model.dart';
 
-class Group extends StatelessWidget {
-  const Group({super.key});
+class Broadcast extends StatelessWidget {
+  const Broadcast({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class Group extends StatelessWidget {
             Positioned(
               child: Container(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: const Text("New group ",
+                child: const Text("New broadcast",
                     style: TextStyle(fontWeight: FontWeight.bold
                   )
                 )
@@ -22,8 +22,8 @@ class Group extends StatelessWidget {
             Positioned(
               child: Container(
                 padding: const EdgeInsets.only(top: 25),
-                child: const Text("Add participants",
-                  style: TextStyle(color: Colors.white, fontSize: 13.0)
+                child: Text("0 of ${contact.length.toString()} selected",
+                  style: const TextStyle(color: Colors.white, fontSize: 13.0)
                 )
               )
             ),
@@ -70,8 +70,8 @@ class Group extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        child: const Icon(Icons.arrow_forward, color: Colors.white),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: const Icon(Icons.check, color: Colors.white),
         onPressed: (){}
       ),
     );

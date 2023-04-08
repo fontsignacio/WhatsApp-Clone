@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
-import 'package:whatsapp_clone/pages/camera.dart';
-import '../widgets/images_status.dart';
+import 'package:whatsapp_clone/pages/home/camera/camera.dart';
+import '../../../widgets/status/images_status.dart';
 
 class Status extends StatefulWidget {
   const Status({super.key});

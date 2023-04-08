@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/pages/calls.dart';
-import 'package:whatsapp_clone/pages/camera.dart';
-import 'package:whatsapp_clone/pages/broadcast.dart';
-import 'package:whatsapp_clone/pages/chat_list.dart';
-import 'package:whatsapp_clone/pages/status.dart';
-import 'package:whatsapp_clone/pages/group.dart';
-import 'package:whatsapp_clone/pages/settings.dart';
-import 'package:whatsapp_clone/widgets/search_chats.dart';
+import 'package:whatsapp_clone/pages/home/call/calls.dart';
+import 'package:whatsapp_clone/pages/home/camera/camera.dart';
+import 'package:whatsapp_clone/pages/menu/broadcast.dart';
+import 'package:whatsapp_clone/pages/home/chat/chat_list.dart';
+import 'package:whatsapp_clone/pages/home/status/status.dart';
+import 'package:whatsapp_clone/pages/menu/group.dart';
+import 'package:whatsapp_clone/pages/menu/settings/settings.dart';
+import 'package:whatsapp_clone/widgets/chat/search_chats.dart';
 
 enum MenuItem {item1,item2,item3,item4,item5}
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
-import 'package:whatsapp_clone/widgets/image_profile.dart';
+import 'package:whatsapp_clone/widgets/chat/image_profile.dart';
 
 class User extends StatelessWidget {
   const User({super.key});

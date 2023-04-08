@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/contact_model.dart';
-import 'package:whatsapp_clone/pages/chat_screen.dart'; 
+import 'package:whatsapp_clone/pages/home/chat/chat_screen.dart'; 
 
 enum MenuItem {item1,item2,item3,item4}
 

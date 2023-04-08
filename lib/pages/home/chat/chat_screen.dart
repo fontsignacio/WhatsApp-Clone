@@ -1,13 +1,13 @@
 import 'package:whatsapp_clone/models/chat_model.dart';
 import 'package:custom_clippers/custom_clippers.dart';
-import 'package:whatsapp_clone/pages/camera.dart';
+import 'package:whatsapp_clone/pages/home/camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/pages/profile_contact.dart';
+import 'package:whatsapp_clone/pages/home/chat/profile_contact.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/foundation.dart' as foundation;
-import '../widgets/message.dart';
+import '../../../widgets/chat/message.dart';
 import 'package:intl/intl.dart';
-import '../widgets/avatar.dart';
+import '../../../widgets/chat/avatar.dart';
 
 
 enum MenuItem {item1,item2,item3,item4,item5,item6,item7}

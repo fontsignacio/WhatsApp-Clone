@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/pages/chat_screen.dart';
+import 'package:whatsapp_clone/pages/home/chat/chat_screen.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
 
 class Images extends StatefulWidget {

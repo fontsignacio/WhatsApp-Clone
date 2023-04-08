@@ -1,49 +1,22 @@
-
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/pages/chat_screen.dart';
-import '../models/chat_model.dart';
+import 'package:whatsapp_clone/models/chat_model.dart';
+import 'package:whatsapp_clone/pages/home/chat/chat_screen.dart';
+import 'package:whatsapp_clone/pages/buttom/contacts.dart'; 
+import 'dart:math';
 
-class SearchChats extends StatefulWidget {
-  const SearchChats({super.key});
+class ChatList extends StatefulWidget {
+  const ChatList({super.key});
 
   @override
-  State<SearchChats> createState() => _SearchContactState();
+  State<ChatList> createState() => _ChatListState();
 }
 
-class _SearchContactState extends State<SearchChats> {
-  TextEditingController searchController = TextEditingController();
-  List<ChatModel> data = messageData;
-
+class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: TextField(
-          controller: searchController,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: "Search...",
-            hintStyle: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          onChanged: (String text) {
-            text = text.toLowerCase();
-            setState(() {
-              data = messageData.where((u) {
-                var message = u.message.toLowerCase();
-                var name = u.name.toLowerCase();
-                return message.contains(text) || name.contains(text);
-              }).toList();
-            });
-          }
-        ),
-      ),
       body: ListView.builder(
-        itemCount: data.length,
+        itemCount: messageData.length,
         itemBuilder:(context, i) => Column(
           children: <Widget>[
             ListTile(
@@ -51,7 +24,7 @@ class _SearchContactState extends State<SearchChats> {
                 padding: const EdgeInsets.all(1.5),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(25),
-                  child: Image.asset(data[i].imageUrl,
+                  child: Image.asset(messageData[i].imageUrl,
                     height: 40,
                     width: 40,
                     fit: BoxFit.cover,
@@ -61,10 +34,10 @@ class _SearchContactState extends State<SearchChats> {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                Text(data[i].name,
+                Text(messageData[i].name,
                 style: const TextStyle(fontWeight: FontWeight.bold),  
               ),
-                Text(data[i].timeNow,
+                Text(messageData[i].timeNow,
                 style: const TextStyle(color: Colors.grey, fontSize: 14.0)
               )
               ]),
@@ -72,9 +45,9 @@ class _SearchContactState extends State<SearchChats> {
                 padding: const EdgeInsets.only(top: 5.0),
                 child: Row(
                   children: [
-                    data[i].send,
+                    messageData[i].send,
                     Expanded(
-                      child: Text(data[i].newMessage,
+                      child: Text(messageData[i].newMessage,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(color: Colors.grey, fontSize: 15.0),
                       ),
@@ -85,8 +58,8 @@ class _SearchContactState extends State<SearchChats> {
               onTap: (() {
                 var router = MaterialPageRoute(
                   builder: ((context) => ChatScreen(
-                      name: data[i].name,
-                      imageUrl: data[i].imageUrl,
+                      name: messageData[i].name,
+                      imageUrl: messageData[i].imageUrl,
                       index: i,
                     )
                   )
@@ -96,6 +69,22 @@ class _SearchContactState extends State<SearchChats> {
             ))
           ]
         ),
+      ),
+      
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: Transform.rotate(
+          angle: pi / 1,
+          child: const Icon(
+            Icons.message,
+            color: Colors.white
+          ),
+        ),
+        onPressed: (){
+          var router = MaterialPageRoute(
+          builder: (context) => const Contacts());
+          Navigator.of(context).push(router);
+        }
       ),
     );
   }

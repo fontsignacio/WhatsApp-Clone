@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/contact_model.dart';
-import '../widgets/image_profile.dart';
-import 'package:whatsapp_clone/pages/chat_screen.dart';
+import '../../../models/contact_model.dart';
+import '../../../widgets/chat/image_profile.dart';
+import 'package:whatsapp_clone/pages/home/chat/chat_screen.dart';
 import 'dart:math';
 
 enum MenuItem {item1,item2,item3,item4}

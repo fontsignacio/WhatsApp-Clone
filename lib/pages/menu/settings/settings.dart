@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
-import 'package:whatsapp_clone/pages/profile_user.dart';
+import 'package:whatsapp_clone/pages/menu/settings/profile_user.dart';
 
 enum MenuItem {item1,item2,item3,item4,item5}
 
