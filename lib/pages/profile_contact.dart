@@ -40,7 +40,7 @@ class _ProfileState extends State<Profile> {
                 background: GestureDetector(
                   onTap: (){
                     var router = MaterialPageRoute(
-                    builder: (context) => ImageProfile(index: widget.index));
+                    builder: (context) => ImageProfile(index: contact[widget.index].imgUrl));
                     Navigator.pushReplacement(context, router);
                   },
                   child: ClipRRect(

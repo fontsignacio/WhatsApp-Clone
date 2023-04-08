@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/status_model.dart';
+import 'package:whatsapp_clone/pages/profile_user.dart';
 
 enum MenuItem {item1,item2,item3,item4,item5}
 
@@ -20,39 +21,53 @@ class Settings extends StatelessWidget {
           Row(
             children: [
               Flexible(
-                child: Container(
-                  padding: const EdgeInsets.all(15),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(mystatus[0].imgUrl,
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
+                child: GestureDetector(
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.asset(mystatus[0].imgUrl,
+                        height: 60,
+                        width: 60,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+                  onTap: () {
+                    var router = MaterialPageRoute(
+                    builder: (context) => const User()); 
+                    Navigator.of(context).push(router);
+                  },
                 ),
               ),
-              Stack(
-                children: [
-                  Positioned(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      padding: const EdgeInsets.only(bottom: 10),
-                        child: const Text("Leonardo Valenzuela",
-                          style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500,
+              GestureDetector(
+                child: Stack(
+                  children: [
+                    Positioned(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        padding: const EdgeInsets.only(bottom: 10),
+                          child: const Text("Leonardo Valenzuela",
+                            style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500,
+                          )
                         )
-                      )
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      padding: const EdgeInsets.only(top: 24),
-                      child: const  Text("Hey there! I am using WhatsApp",
-                      style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w500, color: Colors.black45))
+                    Positioned(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        padding: const EdgeInsets.only(top: 24),
+                        child: const  Text("Hey there! I am using WhatsApp",
+                        style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.w500, color: Colors.black45))
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+                onTap: () {
+                  var router = MaterialPageRoute(
+                  builder: (context) => const User()); 
+                  Navigator.of(context).push(router);
+                },
               ), 
               const Icon(
                 Icons.qr_code,

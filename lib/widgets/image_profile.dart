@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/contact_model.dart';
 
 class ImageProfile extends StatelessWidget {
   const ImageProfile({super.key, required this.index});
-  final int index;
+  final String index;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,7 @@ class ImageProfile extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       body: Center(
-        child: Image.asset(contact[index].imgUrl,
+        child: Image.asset(index,
           fit: BoxFit.contain,
           scale: 1,
           height: 600,

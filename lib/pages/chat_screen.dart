@@ -2,7 +2,7 @@ import 'package:whatsapp_clone/models/chat_model.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:whatsapp_clone/pages/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/pages/profile.dart';
+import 'package:whatsapp_clone/pages/profile_contact.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import '../widgets/message.dart';
@@ -68,13 +68,16 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     });
     
     message.animationController.forward();
+  }
 
+  @override
+  void initState() {
+    super.initState();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
         showEmojiPicker = false;
       }
     });
-
   }
 
 
@@ -112,12 +115,12 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                     decoration: InputDecoration(
                       prefixIcon: IconButton(
                         icon: showEmojiPicker ? const Icon(Icons.keyboard,size: 30,color: Colors.grey) :
-                        const Icon(Icons.emoji_emotions,size: 30,color: Colors.grey),
+                        const Icon(Icons.emoji_emotions_outlined,size: 30,color: Colors.grey),
                         onPressed: () {
                           setState(() {
                             showEmojiPicker = !showEmojiPicker;
                             focusNode.unfocus();
-                            focusNode.canRequestFocus = true;
+                            focusNode.canRequestFocus = true;                         
                           });
                         },
                       ),

@@ -105,17 +105,17 @@ class _WhatsAppHomeState extends State<WhatsAppHome> with SingleTickerProviderSt
                 width: yourWidth,
                   height: 50,
                   alignment: Alignment.center,
-                  child: const Text("CHATS")),
+                  child: const Text("CHATS", overflow: TextOverflow.ellipsis,)),
               Container(
                   width: yourWidth,
                   height: 50,
                   alignment: Alignment.center,
-                  child: const  Text("STATUS")),
+                  child: const  Text("STATUS", overflow: TextOverflow.ellipsis,)),
               Container(
                   width: yourWidth,
                   height: 50,
                   alignment: Alignment.center,
-                  child: const Text("CALL"))
+                  child: const Text("CALL", overflow: TextOverflow.ellipsis,))
             ],
           controller: controller,
         )

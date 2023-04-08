@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
 import 'package:whatsapp_clone/pages/chat_screen.dart';
 import 'package:whatsapp_clone/pages/contacts.dart'; 
+import 'dart:math';
 
 class ChatList extends StatefulWidget {
   const ChatList({super.key});
@@ -72,7 +73,13 @@ class _ChatListState extends State<ChatList> {
       
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        child: const Icon(Icons.message, color: Colors.white,),
+        child: Transform.rotate(
+          angle: pi / 1,
+          child: const Icon(
+            Icons.message,
+            color: Colors.white
+          ),
+        ),
         onPressed: (){
           var router = MaterialPageRoute(
           builder: (context) => const Contacts());
