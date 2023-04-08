@@ -112,16 +112,19 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                       if (showEmojiPicker) setState(() => showEmojiPicker = !showEmojiPicker);
                     },
                     decoration: InputDecoration(
-                      prefixIcon: IconButton(
-                        icon: showEmojiPicker ? const Icon(Icons.keyboard,size: 30,color: Colors.grey) :
-                        const Icon(Icons.emoji_emotions_outlined,size: 30,color: Colors.grey),
-                        onPressed: () {
-                          setState(() {
-                            showEmojiPicker = !showEmojiPicker;
-                            focusNode.unfocus();
-                            focusNode.canRequestFocus = true;                         
-                          });
-                        },
+                      prefixIcon: Container(
+                        padding: EdgeInsets.only(left: 5, bottom: 5),
+                        child: IconButton(
+                          icon: showEmojiPicker ? const Icon(Icons.keyboard,size: 30,color: Colors.grey) :
+                          const Icon(Icons.emoji_emotions_outlined,size: 30,color: Colors.grey),
+                          onPressed: () {
+                            setState(() {
+                              showEmojiPicker = !showEmojiPicker;
+                              focusNode.unfocus();
+                              focusNode.canRequestFocus = true;                         
+                            });
+                          },
+                        ),
                       ),
                       hintText: "Message",
                       border: const OutlineInputBorder(
@@ -139,17 +142,20 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                               color: Colors.grey
                             ),
                           ),
-                          if (!_isTyped) IconButton(                
-                            icon: const Icon(
-                              Icons.camera_alt_rounded,
-                              size: 30,
-                              color: Colors.grey,
+                          if (!_isTyped) Container(
+                            padding: const EdgeInsets.only(right: 10, bottom: 4),
+                            child: IconButton(                
+                              icon: const Icon(
+                                Icons.camera_alt_rounded,
+                                size: 30,
+                                color: Colors.grey,
+                              ),
+                              onPressed: () {
+                                var router = MaterialPageRoute(
+                                builder: (context) => const Camera()); 
+                                Navigator.of(context).push(router);
+                              },
                             ),
-                            onPressed: () {
-                              var router = MaterialPageRoute(
-                              builder: (context) => const Camera()); 
-                              Navigator.of(context).push(router);
-                            },
                           ),
                         ],
                       ),               
@@ -275,10 +281,11 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
           decoration: const  BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/wallpaper.jpg"),
-              fit: BoxFit.fitWidth
+              fit: BoxFit.cover
             )
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[ 
               Container(
                 margin: const EdgeInsets.only(top: 10),
@@ -356,8 +363,8 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               ),               
               Flexible(
                 child: ListView.builder(
-                  padding: const EdgeInsets.only(left: 5, bottom: 270),
                   reverse: true,
+                  shrinkWrap: true,
                   itemBuilder: (_, int index) => _messages[index],
                   itemCount: _messages.length,
                 ),

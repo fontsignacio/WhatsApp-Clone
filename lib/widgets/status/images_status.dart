@@ -91,6 +91,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return  SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Column(
           children: [
             LinearProgressIndicator(
@@ -238,8 +239,7 @@ class _ImagesState extends State<Images> with TickerProviderStateMixin {
               )
             ),
           ],
-        ),
-        backgroundColor: Colors.black,
+        ),   
       )
     );
   }

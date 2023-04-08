@@ -102,11 +102,11 @@ class _ContactsState extends State<CallContact> {
                       child: Stack(
                         children: const [
                           Positioned(
-                            child: Icon(Icons.call, color: const Color.fromARGB(255, 0, 128, 106),),
+                            child: Icon(Icons.call, color: Color.fromARGB(255, 0, 128, 106),),
                           ),
                           Positioned(
                             left: 50,
-                            child: Icon(Icons.videocam_rounded, color: const Color.fromARGB(255, 0, 128, 106),),
+                            child: Icon(Icons.videocam_rounded, color: Color.fromARGB(255, 0, 128, 106),),
                           ),
                         ],
                       ),
