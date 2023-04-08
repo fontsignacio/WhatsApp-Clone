@@ -113,7 +113,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                     },
                     decoration: InputDecoration(
                       prefixIcon: Container(
-                        padding: EdgeInsets.only(left: 5, bottom: 5),
+                        padding: const EdgeInsets.only(left: 5, bottom: 5),
                         child: IconButton(
                           icon: showEmojiPicker ? const Icon(Icons.keyboard,size: 30,color: Colors.grey) :
                           const Icon(Icons.emoji_emotions_outlined,size: 30,color: Colors.grey),
@@ -134,12 +134,15 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween, // added line
                         mainAxisSize: MainAxisSize.min, // added line
                         children: <Widget>[
-                          Transform.rotate(
-                            angle: 180,
-                            child: const Icon(
-                              Icons.attachment_outlined,
-                              size: 30, 
-                              color: Colors.grey
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Transform.rotate(
+                              angle: 180,
+                              child: const Icon(
+                                Icons.attachment_outlined,
+                                size: 30, 
+                                color: Colors.grey
+                              ),
                             ),
                           ),
                           if (!_isTyped) Container(

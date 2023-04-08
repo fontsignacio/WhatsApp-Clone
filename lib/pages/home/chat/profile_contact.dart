@@ -91,16 +91,25 @@ class _ProfileState extends State<Profile> {
                             light = value;
                           });
                         },
-                        secondary: const Icon(Icons.notifications),
+                        secondary: const Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Icon(Icons.notifications),
+                        ),
                       );
                     case 2: return  const ListTile(
                         tileColor: Colors.white,
-                        leading: Icon(Icons.music_note),
+                        leading: Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Icon(Icons.music_note),
+                        ),
                         title: Text('Custom notifications'),
                       );
                     case 3: return  const ListTile(
                         tileColor: Colors.white,
-                        leading: Icon(Icons.image),
+                        leading: Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Icon(Icons.image),
+                        ),
                         title: Text('Media visibility'),
                       );
                     case 4: return  const SizedBox(height: 15);
@@ -108,7 +117,10 @@ class _ProfileState extends State<Profile> {
                       height: 80,
                       child: ListTile(
                           tileColor: Colors.white,
-                          leading: Icon(Icons.lock),
+                          leading: Padding(
+                            padding: EdgeInsets.only(left: 8, top:5.0),
+                            child: Icon(Icons.lock),
+                          ),
                           title: Padding(
                             padding: EdgeInsets.only(top: 10),
                             child: Text('Encryption'),
@@ -136,7 +148,7 @@ class _ProfileState extends State<Profile> {
                           style: TextStyle(fontSize: 13),
                         ),
                       );
-                    case 9: return  const Divider(height: 1);
+                    case 9: return  const Divider(height: 0);
                     case 10: return  ListTile(
                         tileColor: Colors.white,
                         title: const Text("+11 111-1111-111"),
@@ -174,26 +186,56 @@ class _ProfileState extends State<Profile> {
                         ),             
                       );         
                     case 11: return  const SizedBox(height: 15);
-                    case 12: return  ListTile(
-                        tileColor: Colors.white,
-                        leading: const Icon(Icons.block, color: Colors.red,),
-                        title: Text("Block ${contact[widget.index].name}",
-                          style: const TextStyle(color: Colors.red),
+                    case 12: return  Container(
+                        height: 30,
+                        alignment: Alignment.topLeft,
+                        child: const ListTile(  
+                          tileColor: Colors.white,
+                          title: Padding(
+                            padding: EdgeInsets.only(bottom: 13),
+                            child: Text("No groups in common",
+                              style: TextStyle(fontSize: 13, color: Colors.grey),
+                            ),
+                          ),
                         ),
                       );
                     case 13: return  ListTile(
                         tileColor: Colors.white,
-                        leading: const Icon(Icons.thumb_down, color: Colors.red,),
+                        leading: const CircleAvatar(
+                          backgroundColor:  Color.fromARGB(255,  0, 128, 106),
+                          child: Icon(Icons.group, color: Colors.white,)
+                        ),
+                        title: Text("Create group with ${contact[widget.index].name}",
+                          //style: const TextStyle(color: Colors.red),
+                        ),
+                      );
+                    case 14: return  const SizedBox(height: 15);
+                    case 15: return  ListTile(
+                        tileColor: Colors.white,
+                        leading: const Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Icon(Icons.block, color: Colors.red,),
+                        ),
+                        title: Text("Block ${contact[widget.index].name}",
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      );
+                    case 16: return  ListTile(
+                        tileColor: Colors.white,
+                        leading: const Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Icon(Icons.thumb_down, color: Colors.red,),
+                        ),
                         title: Text("Report ${contact[widget.index].name}",
                           style: const TextStyle(color: Colors.red),
                         ),
                       );
-                    case 14: return const SizedBox(height: 100);
+                    case 17: return const SizedBox(height: 250);
                     default:
                       return null;
                   }         
                 },
-                childCount: 16
+                childCount: 18
               )
             )
           ],
