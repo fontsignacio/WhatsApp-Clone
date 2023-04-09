@@ -1,6 +1,6 @@
 # WhatsApp Clone
 
-Building a basic WhatsApp Clone UI in Flutter. Without Firebase.
+Building a WhatsApp Clone UI/UX using Flutter and Dart. Without Database and WebSockets.
 
 ## App Features.
 
@@ -13,10 +13,9 @@ Building a basic WhatsApp Clone UI in Flutter. Without Firebase.
 - Call list
 - Camera
 
-## Animation GIFs
+## Screenshot
 
-![1 (1)](https://user-images.githubusercontent.com/93054257/209562561-5d56a375-58f9-4c72-9848-47b8370d31a5.gif)
-![2 (1)](https://user-images.githubusercontent.com/93054257/209562563-a24d1072-d639-450e-9107-773ee1594144.gif)
+![image](https://user-images.githubusercontent.com/93054257/230748849-de66a7e6-fc22-44bb-8d8a-d89115b64dca.png)
 
 ## Download Link
 
